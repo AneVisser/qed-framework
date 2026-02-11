@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--to run this suite from the command line, use:
+gradlew clean test -Puitestingplayground
+gradlew clean test - -tests "*mixedUIAPI" (the hyphens should not have a space inbetween)
+-->
+
+<suite name="mixedUIAPI" verbose="10" parallel="methods" thread-count="6">
+    <parameter name="configfile" value="src/test/kotlin/mixedUIAPI/mixedUIAPI-config.json"/>
+    <test name="Test with mixedUIAPI UI and REST classes">
+        <classes>
+            <class name="mixedUIAPI.testcases.LoginRestTest"/>
+            <class name="mixedUIAPI.testcases.LoginUI_1Test"/>
+            <class name="mixedUIAPI.testcases.LoginUI_2Test"/>
+            <class name="mixedUIAPI.testcases.LoginUI_3Test"/>
+            <class name="mixedUIAPI.testcases.LoginUI_4Test"/>
+            <class name="mixedUIAPI.testcases.UI_RESTTest"/>
+        </classes>
+    </test>
+</suite>

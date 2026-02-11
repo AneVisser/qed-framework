@@ -1,0 +1,112 @@
+site_name: QED Test Automation Framework 
+site_url: https://AneVisser.github.io/QED/ 
+repo_url: https://github.com/AneVisser/QED 
+repo_name: QED
+
+theme:
+  name: material
+  logo: images/qed_logo_only.svg
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top      
+    - navigation.prune    
+    - toc.follow          
+    - toc.integrate       
+    - content.code.annotate
+    - content.math
+  palette:
+    scheme: default
+    primary: lightblue
+    accent: lime
+    
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - attr_list                  # useful if you want fenced-attrs like ```kotlin {..}
+  - pymdownx.highlight:
+      use_pygments: true
+      pygments_lang_class: true
+      line_spans: __span
+  - pymdownx.tabbed
+  - pymdownx.inlinehilite
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.mark
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+      - name: mermaid
+        class: mermaid
+        format: !!python/name:pymdownx.superfences.fence_code_format
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://unpkg.com/mermaid@10.4.0/dist/mermaid.min.js
+  - assets/extra.js
+extra_css:
+  - assets/custom.css
+  - assets/extra.css
+nav: 
+  - Home: index.md 
+  - Getting Started: 
+      - Prerequisites: getting-started/prerequisites.md 
+      - Installation: getting-started/installation.md 
+      - First test: getting-started/first-test.md 
+  - DSL:
+      - Overview: dsl/overview.md
+      - Core constructs: dsl/core-constructs.md
+      - Idiomatic patterns: dsl/idiomatic-patterns.md
+      - JSON utilities: dsl/jsonutils.md
+      - Examples: dsl/examples.md
+  - Configuring SUT's: 
+      - SUT Profiles: sut/sut-profiles.md 
+      - Reporting: sut/reporting.md
+  - JS Widgets:
+      - Page elements: widgets/page-elements.md  
+      - Supported JS Widgets Systems: widgets/supported-systems.md
+      - Locator Strategies: widgets/locator-strategies.md
+      - Widget Abstractions: widgets/widget-abstractions.md
+  - Page Objects: 
+      - Screen Area Composition: page-objects/screen-area-composition.md
+      - Avoiding Duplication: page-objects/avoiding-duplication.md
+      - Best Practices: page-objects/best-practices.md
+  - REST & TDD:
+      - Setup: rest/setup.md
+      - DSL for APIs: rest/dsl-for-apis.md
+      - TDD Workflow: rest/tdd-workflow.md
+      - Performance testing: rest/performance.md
+      - Sharing with Ktor: rest/ktor_sharing.md
+  - Philosophy:
+      - Origin Story: philosophy/origin-story.md
+      - Design Principles: philosophy/design-principles.md
+      - Behaviour driven style: philosophy/bdd.md
+      - Legacy Frustrations: philosophy/legacy-frustrations.md
+  - Architecture:
+      - Project Structure: architecture/project-structure.md 
+      - Extensibility: architecture/extensibility.md
+      - Plugin System: architecture/plugin-system.md
+      - Thread Safety & Concurrency: architecture/thread-safety.md
+  - Reporting:
+      - ExtentReports Setup: reporting/extent-reports.md
+      - CI Pipelines: reporting/ci-pipelines.md
+      - Test Tags & Filtering: reporting/test-tags.md
+  - AI:
+      - Overview: ai/overview.md
+      - Ollama: ai/ollama.md
+      - Architecture: ai/architecture.md
+  - Tutorials:
+      - Step-by-Step Guides: tutorials/step-by-step.md
+      - Real-World Scenarios: tutorials/real-world-scenarios.md
+      - Common Pitfalls: tutorials/common-pitfalls.md
+  - Community:
+      - How to Contribute: community/how-to-contribute.md
+      - Roadmap: community/roadmap.md
+      - Acknowledgments: community/acknowledgements.md

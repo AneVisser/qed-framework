@@ -1,0 +1,12 @@
+{
+  "environments": {
+    "dev": {
+      "url": "http://uitestingplayground.com/"
+    }
+  },
+  "widgettype" : "REACT",
+  "browser" : "chromium",
+  "reporting": {
+
+  }
+}

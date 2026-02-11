@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "commit": {
+      "branch": "main",
+      "commit": "d7938ce96b9139ca82774533dbbf6b8d6c54d33b",
+      "timestamp": "2026-02-10 15:40:43"
+    },
+    "environment": "dev",
+    "sut": "apichallenges",
+    "rundate": "2026-02-11 13:46:34"
+  },
+  "records": [
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "GET",
+      "duration": 2103.9278
+    },
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "GET",
+      "duration": 753.88
+    },
+    {
+      "urlpath": "/todos",
+      "requestType": "GET",
+      "duration": 766.5983
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 2108.8888
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 1848.6854
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 769.0647
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 763.0952
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 775.4899
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 773.8947
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 762.8035
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 768.1315
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 761.431
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 762.8317
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 778.7419
+    },
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "PUT",
+      "duration": 2001.6754
+    },
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "PUT",
+      "duration": 761.8348
+    }
+  ]
+}

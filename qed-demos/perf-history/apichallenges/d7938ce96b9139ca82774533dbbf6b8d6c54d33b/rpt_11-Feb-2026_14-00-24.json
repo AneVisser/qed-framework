@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "commit": {
+      "branch": "main",
+      "commit": "d7938ce96b9139ca82774533dbbf6b8d6c54d33b",
+      "timestamp": "2026-02-10 15:40:43"
+    },
+    "environment": "dev",
+    "sut": "apichallenges",
+    "rundate": "2026-02-11 14:00:24"
+  },
+  "records": [
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "GET",
+      "duration": 2006.0823
+    },
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "GET",
+      "duration": 783.3171
+    },
+    {
+      "urlpath": "/todos",
+      "requestType": "GET",
+      "duration": 759.2337
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 2012.5298
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 1745.6523
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 772.9194
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 771.7091
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 771.475
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 762.1345
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 765.9359
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 763.1954
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 770.461
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 759.507
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 761.1604
+    },
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "PUT",
+      "duration": 1904.8067
+    },
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "PUT",
+      "duration": 762.0636
+    }
+  ]
+}

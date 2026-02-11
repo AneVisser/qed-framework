@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--to run this suite from the command line, use:
+gradlew clean test -Puitestingplayground
+gradlew clean test - -tests "*E2E_UITestingPlayground1Test" (the hyphens should not have a space inbetween)
+-->
+
+<suite name="UITestingPlayground" verbose="10" parallel="methods" thread-count="5">
+    <parameter name="configfile" value="src/test/kotlin/E2E_UITestingPlayground/uitestingplayground-config.json"/>
+    <test name="UI Testing playground">
+        <classes>
+            <class name="E2E_UITestingPlayground.testcases.E2E_UITestingPlayground1Test"/>
+            <class name="E2E_UITestingPlayground.testcases.E2E_UITestingPlayground2Test"/>
+            <class name="E2E_UITestingPlayground.testcases.E2E_UITestingPlayground3Test"/>
+            <class name="E2E_UITestingPlayground.testcases.E2E_UITestingPlayground4Test"/>
+            <class name="E2E_UITestingPlayground.testcases.E2E_UITestingPlayground5Test"/>
+        </classes>
+    </test>
+</suite>

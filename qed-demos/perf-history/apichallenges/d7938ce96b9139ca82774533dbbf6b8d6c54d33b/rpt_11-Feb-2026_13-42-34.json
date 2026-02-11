@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "commit": {
+      "branch": "main",
+      "commit": "d7938ce96b9139ca82774533dbbf6b8d6c54d33b",
+      "timestamp": "2026-02-10 15:40:43"
+    },
+    "environment": "dev",
+    "sut": "apichallenges",
+    "rundate": "2026-02-11 13:42:34"
+  },
+  "records": [
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "GET",
+      "duration": 2135.7135
+    },
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "GET",
+      "duration": 765.7078
+    },
+    {
+      "urlpath": "/todos",
+      "requestType": "GET",
+      "duration": 752.4693
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 2137.9026
+    },
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "PUT",
+      "duration": 2056.1565
+    },
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "PUT",
+      "duration": 758.2961
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 1856.9976
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 756.3787
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 758.7313
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 763.7007
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 758.7168
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 763.0774
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 755.5519
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 770.4204
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 757.8628
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 755.1609
+    }
+  ]
+}

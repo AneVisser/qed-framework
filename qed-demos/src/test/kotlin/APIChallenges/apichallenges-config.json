@@ -1,0 +1,25 @@
+{
+  "environments": {
+    "dev": {
+      "url": "https://apichallenges.eviltester.com"
+    },
+    "test" : {
+      "url": "https://apichallenges.eviltester.com"
+    }
+  },
+  "browser" : "chromium",
+  "reporting": {
+    "extent": {
+      "theme" : "STANDARD",
+      "reportName": "API Challenges",
+      "documentTitle" : "API Challenges Report",
+      "enableScreenshots" : true
+    }
+  },
+  "testrunmetadata": {
+    "repository": "C:\\Projects\\QED",
+    "sut":  "apichallenges",
+    "maxRunsPerCommit" : 5,
+    "maxCommitsToKeep" : 20
+  }
+}

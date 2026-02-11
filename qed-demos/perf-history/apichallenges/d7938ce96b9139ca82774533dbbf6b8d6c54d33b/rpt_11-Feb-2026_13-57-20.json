@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "commit": {
+      "branch": "main",
+      "commit": "d7938ce96b9139ca82774533dbbf6b8d6c54d33b",
+      "timestamp": "2026-02-10 15:40:43"
+    },
+    "environment": "dev",
+    "sut": "apichallenges",
+    "rundate": "2026-02-11 13:57:20"
+  },
+  "records": [
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "GET",
+      "duration": 2112.1122
+    },
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "GET",
+      "duration": 775.7177
+    },
+    {
+      "urlpath": "/todos",
+      "requestType": "GET",
+      "duration": 772.4748
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 2110.3879
+    },
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "PUT",
+      "duration": 1940.2111
+    },
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "PUT",
+      "duration": 776.0029
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 1725.5703
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 763.2353
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 770.2071
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 771.8905
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 766.0067
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 758.6184
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 774.4477
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 764.7808
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 771.6006
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 763.5418
+    }
+  ]
+}

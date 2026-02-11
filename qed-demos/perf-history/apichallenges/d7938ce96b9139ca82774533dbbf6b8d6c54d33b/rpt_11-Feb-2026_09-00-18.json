@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "commit": {
+      "branch": "main",
+      "commit": "d7938ce96b9139ca82774533dbbf6b8d6c54d33b",
+      "timestamp": "2026-02-10 15:40:43"
+    },
+    "environment": "dev",
+    "sut": "apichallenges",
+    "rundate": "2026-02-11 09:00:18"
+  },
+  "records": [
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "GET",
+      "duration": 2251.6232
+    },
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "GET",
+      "duration": 768.9564
+    },
+    {
+      "urlpath": "/todos",
+      "requestType": "GET",
+      "duration": 768.8757
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 2255.1938
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 2020.1697
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 764.9703
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 772.1422
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 759.8538
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 752.7302
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 754.6518
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 770.6157
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 758.7939
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 765.5685
+    },
+    {
+      "urlpath": "/sim/entities",
+      "requestType": "POST",
+      "duration": 771.6848
+    },
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "PUT",
+      "duration": 2148.0253
+    },
+    {
+      "urlpath": "/sim/entities/{entity}",
+      "requestType": "PUT",
+      "duration": 760.0472
+    }
+  ]
+}

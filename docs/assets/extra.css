@@ -1,0 +1,27 @@
+/*
+.mermaid {
+  width: 100%;
+  max-width: 1200px;     /* Increase this to make the diagram wider * /
+  margin: 0 auto;         /* Center it * /
+  font-size: 1.1rem;      /* Optional: scale text inside diagram * /
+}
+.mermaid svg {
+  width: 100% !important;
+  height: auto !important;
+}
+.mermaid-container {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 1rem;
+}
+*/
+
+.mermaid-container .mermaid svg {
+  width: 1600px !important;  /* Increase this for larger diagrams */
+  height: auto !important;
+}
+
+.language-mermaid > svg {
+  width: 1200px !important;   /* Or 100% for responsive */
+  height: auto !important;
+}

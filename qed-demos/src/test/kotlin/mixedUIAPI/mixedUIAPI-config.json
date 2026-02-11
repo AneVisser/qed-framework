@@ -1,0 +1,20 @@
+{
+  "environments": {
+    "dev": {
+      "googleurl": "http://google.com/",
+      "uitestingurl": "http://uitestingplayground.com/",
+      "pbtechurl": "http://pbtech.co.nz/",
+      "apichallenges": "https://apichallenges.eviltester.com"
+    }
+  },
+  "widgettype" : "REACT",
+  "browser" : "chromium",
+  "reporting": {
+    "extent": {
+      "theme" : "DARK",
+      "reportName": "mixed UI API report",
+      "documentTitle" : "UI API Report",
+      "enableScreenshots" : false
+    }
+  }
+}
