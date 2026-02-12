@@ -26,8 +26,9 @@ test-output/
 site/
 
 # ── Nested repos (not part of this repo) ──────────────────────────────
+QED-Shared-DairyMax/
 qed-sut-*/
 QED_Framework/
 untitled/
 qed-demos/perf-history/
-QED-Shared-DairyMax/
+
