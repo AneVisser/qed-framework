@@ -1,0 +1,40 @@
+# Kotlin/Java build artifacts
+/build/
+/out/
+/.gradle/
+/.idea/
+/*.iml
+
+# IntelliJ project files
+*.iws
+*.ipr
+*.iml
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Logs and temp
+*.log
+*.tmp
+
+# DSL-generated artifacts
+/generated/
+*.dsl.json
+*.semantic.meta.json
+
+# Embedding/vector cache
+*.chroma.db
+*.faiss.index
+*.annoy.index
+
+# Secrets and local config
+.env
+*.local.properties
+
+# Test snapshots or golden files
+/test-output/
+/snapshots/
+
+# VS Code (if used)
+.vscode/
