@@ -91,4 +91,4 @@ class UI_RESTTest : TestContext(baseTest, hasBrowser, hasRest) {
 ![Screenshot of a single test execution report](/images/QED_Report.png)
 
 
-
+further documentation can be found here: [QEDFramework](https://github.com/orgs/QED-testing)
