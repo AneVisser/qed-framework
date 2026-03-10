@@ -60,7 +60,8 @@ nav:
   - Home: index.md 
   - Getting Started: 
       - Prerequisites: getting-started/prerequisites.md 
-      - Installation: getting-started/installation.md 
+      - Installation: getting-started/installation.md
+      - Custom Test Suites: getting-started/customtestsuites.md
       - First test: getting-started/first-test.md 
   - DSL:
       - Overview: dsl/overview.md
