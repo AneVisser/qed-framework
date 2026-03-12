@@ -4,6 +4,7 @@ repo_url: https://github.com/AneVisser/QED
 repo_name: QED
 docs_dir: docs
 site_dir: site
+use_directory_urls: false
 
 theme:
   name: material
