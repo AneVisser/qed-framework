@@ -1,7 +1,10 @@
 site_name: QED Test Automation Framework 
-site_url: https://AneVisser.github.io/QED/ 
+site_url: https://qed-testing.github.io/qed-core/
 repo_url: https://github.com/AneVisser/QED 
 repo_name: QED
+docs_dir: docs
+site_dir: site
+use_directory_urls: false
 
 theme:
   name: material
@@ -58,7 +61,8 @@ nav:
   - Home: index.md 
   - Getting Started: 
       - Prerequisites: getting-started/prerequisites.md 
-      - Installation: getting-started/installation.md 
+      - Installation: getting-started/installation.md
+      - Custom Test Suites: getting-started/customtestsuites.md
       - First test: getting-started/first-test.md 
   - DSL:
       - Overview: dsl/overview.md
