@@ -88,6 +88,8 @@ nav:
       - TDD Workflow: rest/tdd-workflow.md
       - Performance testing: rest/performance.md
       - Sharing with Ktor: rest/ktor_sharing.md
+      - testing EMails with Mailpit: rest/testing-emails.md
+      - setting up Mailpit: rest/setup-mailpit.md
   - Philosophy:
       - Origin Story: philosophy/origin-story.md
       - Design Principles: philosophy/design-principles.md
