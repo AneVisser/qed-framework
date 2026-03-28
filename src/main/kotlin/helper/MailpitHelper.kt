@@ -6,6 +6,7 @@ import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import org.json.JSONObject
 import org.json.JSONArray
+import qed.testbaseclass.QedFrameworkSettings
 
 /**
  * Helper for querying and managing the Mailpit email capture server.
@@ -17,7 +18,9 @@ import org.json.JSONArray
 object MailpitHelper {
 
 //    private const val MAILPIT_BASE_URL = "http://192.168.56.13:8025"
-    private const val MAILPIT_BASE_URL = "http://192.168.50.104:8025"
+    private val MAILPIT_BASE_URL: String
+        get() = QedFrameworkSettings.mailpitBaseUrl
+
     private val client = HttpClient.newHttpClient()
 
     /**

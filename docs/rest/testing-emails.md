@@ -10,29 +10,68 @@ QED uses Mailpit to verify outbound email flows end-to-end — asserting on subj
 recipient, and link content rather than just checking that an API returns HTTP 200.
 
 **Mailpit is not part of the application under test.** It is a QED infrastructure
-component. For VM setup and installation, see
-`qed-mailpit-infrastructure.md`.
+component. For VM setup and installation, see `qed-mailpit-infrastructure.md`.
 
 ---
 
 ## Configuration
 
-The Mailpit API base URL is a QED configuration value. Add it to the QED configuration
-file alongside other infrastructure URLs:
+### Framework config file
 
+Mailpit connection details live in the QED framework's own config file, not in any
+SUT config. This means any SUT tested with QED automatically has access to Mailpit
+without any per-project configuration.
+
+**Location:** `src/main/resources/qed-framework.json` (in the QED framework project)
+
+```json
+{
+  "environments": {
+    "dev": {
+      "mailpitBaseUrl": "http://192.168.50.104:8025"
+    },
+    "stag": {
+      "mailpitBaseUrl": "http://192.168.56.13:8025"
+    },
+    "preprod": {
+      "mailpitBaseUrl": "http://192.168.56.13:8025"
+    }
+  }
+}
 ```
-mailpitBaseUrl = http://192.168.56.13:8025
+
+This file is committed to the QED framework repository. Because the Mailpit VM has
+fixed IP addresses that are the same for everyone on the team, there is no per-machine
+setup needed.
+
+The environment is selected using the same `env.name` system property used by SUT
+configs (`dev` by default). If no entry exists for the current environment, or if
+the config file is missing, `MailpitHelper` falls back to `http://192.168.56.13:8025`
+with a warning.
+
+**Why two different addresses for dev vs staging/preprod?**
+
+The Mailpit VM has a host-only adapter (`192.168.56.13`) and a LAN/bridged adapter
+(`192.168.50.104`). VirtualBox bridged VMs cannot communicate with their own host
+machine through the bridged adapter, so:
+- QED tests running on Windows use the host-only address for staging and preprod
+- The local dev backend (a JVM process on Windows) uses the LAN address for SMTP
+- QED tests in `dev` environment also use the LAN address for consistency with
+  how the dev backend connects
+
+See `qed-mailpit-infrastructure.md` for the full address reference.
+
+### QedFrameworkSettings
+
+`QedFrameworkSettings` is a singleton in the QED framework that loads
+`qed-framework.json` from the classpath and exposes the values:
+
+```kotlin
+// Usage in MailpitHelper or any other framework code:
+val baseUrl = QedFrameworkSettings.mailpitBaseUrl
 ```
 
-`MailpitHelper` reads this value at startup. If the VM is ever moved or the port
-changes, only the config needs updating.
-
-**Note on addresses:** The Mailpit VM has two network addresses — a host-only address
-(`192.168.56.13`) and a LAN/bridged address (`192.168.50.104`). QED tests running on
-Windows should always use the host-only address. The LAN address is used by the
-application backend when running locally on Windows (since the Windows host cannot
-reach the host-only network from a JVM process in the same way). See
-`qed-mailpit-infrastructure.md` for the full address reference table.
+It is loaded lazily on first access and shared across all tests in the suite.
 
 ---
 
@@ -51,16 +90,26 @@ Full Mailpit API docs: https://mailpit.axllent.org/docs/api-v1/
 
 ## Test Patterns
 
-### Setup — clear inbox before each email test
+### Setup — clear inbox once at suite start
 
-Add `MailpitHelper.clearInbox()` to `@BeforeMethod` for any test class that sends
-email. This handles leftover messages from a previous interrupted run:
+Add `MailpitHelper.clearInbox()` to `@BeforeSuite` — not `@BeforeMethod`. Clearing
+before every method is too aggressive: if two email-related tests run in sequence,
+the `@BeforeMethod` clear would wipe the inbox before the first test's email has been
+consumed, which could mask failures.
+
+The per-message delete inside `waitForEmail()` keeps the inbox clean during the suite.
+The `@BeforeSuite` clear only handles leftover messages from a previous interrupted run.
 
 ```kotlin
+@BeforeSuite
+fun clearMailpitInbox() {
+    MailpitHelper.clearInbox()
+}
+
 @BeforeMethod
 fun setup() {
-    TestHelpers.clearRateLimits(this)
-    MailpitHelper.clearInbox()
+    TestHelpers.clearRateLimits(this)   // rate limits cleared per method as before
+    // no inbox clear here
 }
 ```
 
@@ -171,6 +220,76 @@ suffix).
 
 ---
 
+## Pending: CI runner configuration
+
+When QED is wired into the build pipeline, the current framework config approach needs
+updating. The `env.name` property selects which SUT environment is being tested, not
+where QED is running — but the Mailpit URL depends on where QED is running, not which
+SUT environment is targeted.
+
+**The correct model:**
+
+| QED running on | Mailpit URL |
+|---|---|
+| Windows dev machine | `http://192.168.50.104:8025` (LAN — always, regardless of SUT env) |
+| CI runner on vm-staging | `http://192.168.56.13:8025` (host-only — always) |
+
+**Required changes when implementing CI pipeline:**
+
+1. **Move config file** from `src/main/resources/qed-framework.json` (classpath,
+   committed to repo) to `~/.qed/qed-framework.json` (user home, per-machine)
+
+2. **Flatten `QedFrameworkConfig.kt`** — remove the `environments` map, replace with
+   a single top-level value:
+   ```kotlin
+   data class QedFrameworkConfig(
+       val mailpitBaseUrl: String? = null
+   )
+   ```
+
+3. **Update `QedFrameworkSettings.kt`** — load from user home instead of classpath,
+   remove the `env.name` environment selection:
+   ```kotlin
+   private val CONFIG_PATH =
+       "${System.getProperty("user.home")}/.qed/qed-framework.json"
+   
+   private fun load(): String? {
+       val file = File(CONFIG_PATH)
+       if (!file.exists()) {
+           println("⚠️  QED framework config not found at $CONFIG_PATH — using defaults")
+           return null
+       }
+       return try {
+           QEDJson.fromJson<QedFrameworkConfig>(file.readText())?.mailpitBaseUrl
+       } catch (e: Exception) {
+           println("⚠️  Failed to load QED framework config: ${e.message} — using defaults")
+           null
+       }
+   }
+   ```
+
+4. **Create the config file on vm-staging** (as part of runner setup):
+   ```bash
+   mkdir -p /home/runner/.qed
+   cat > /home/runner/.qed/qed-framework.json << 'EOF'
+   {
+     "mailpitBaseUrl": "http://192.168.56.13:8025"
+   }
+   EOF
+   ```
+
+5. **Windows dev machine config** (`~/.qed/qed-framework.json`):
+   ```json
+   {
+     "mailpitBaseUrl": "http://192.168.50.104:8025"
+   }
+   ```
+
+Until this is implemented, the URL in `src/main/resources/qed-framework.json` should
+be set to `http://192.168.50.104:8025` for running tests from the dev machine.
+
+---
+
 ## Replacing obsolete test routes
 
 Before Mailpit was available, test-only backend routes existed solely to retrieve email
@@ -190,8 +309,9 @@ backend testing routes file after the replacement tests pass.
 ## Troubleshooting
 
 **`waitForEmail` times out:**
-- Check the Mailpit web UI manually at `http://192.168.56.13:8025` — did the email
-  arrive at all?
+- Check the Mailpit web UI manually — did the email arrive at all?
+    - From dev: `http://192.168.50.104:8025`
+    - From Windows host (staging/preprod): `http://192.168.56.13:8025`
 - If the inbox is empty, the problem is in the application SMTP configuration, not QED.
   Check the application logs on the relevant environment.
 - If the email arrived but with the wrong subject or recipient: inspect `Subject` and
@@ -204,13 +324,18 @@ backend testing routes file after the replacement tests pass.
   and adjust the `pathFragment` or splitting logic in `extractLink` accordingly.
 - Try `email.getString("HTML")` if the plain-text body is minimal.
 
-**Mailpit web UI unreachable (`192.168.56.13:8025`):**
+**Mailpit web UI unreachable:**
 - Verify vm-mailpit is running: SSH to `192.168.56.13` and run
   `sudo systemctl status mailpit`
 - Confirm ports are listening: `ss -tlnp | grep -E '1025|8025'`
-- Do NOT use `192.168.50.104` from the Windows host — use the host-only IP
+- Do NOT use `192.168.50.104` from the Windows host — bridged VMs are unreachable
+  from their own host machine. Use `192.168.56.13` instead.
+
+**Wrong Mailpit URL being used:**
+- Check which environment `env.name` is set to: `System.getProperty("env.name")`
+- Verify `qed-framework.json` has the correct entry for that environment
+- Check `QedFrameworkSettings` logs at startup for any warning about missing config
 
 **`clearInbox()` has no visible effect:**
-- Confirm Mailpit is reachable: `Test-NetConnection -ComputerName 192.168.56.13 -Port 8025`
-- The DELETE request returns silently even if Mailpit is unreachable — check
-  connectivity before assuming the inbox was cleared
+- Confirm Mailpit is reachable using `Test-NetConnection` before assuming the inbox
+  was cleared — the DELETE request returns silently even if unreachable

@@ -5,6 +5,7 @@ import QedConfig
 import WidgetType
 import com.aventstack.extentreports.reporter.configuration.Theme
 import org.testng.annotations.*
+import qed.helper.MailpitHelper
 import qed.json.QEDJson
 import qed.reports.ExtentManager
 import qed.reports.ExtentTestListener
@@ -103,5 +104,9 @@ open class TestContext(
         }
     }
 
+    @BeforeSuite
+    fun clearMailpitInbox() {
+        MailpitHelper.clearInbox()
+    }
 
 }
