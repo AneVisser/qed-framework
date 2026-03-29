@@ -62,7 +62,8 @@ open class TestContext(
 
         val config = QEDJson.fromJson<QedConfig>(File(configfile).readText())
         val environment = config?.environments?.get(env)
-        baseTest.environment = environment!!
+        baseTest.envURLs = environment!!
+        baseTest.configEnv = env
         hasBrowser?.widgetType = WidgetType.fromString(config.widgettype.toString())
         hasBrowser?.browserName = BrowserName.entries.first { it.brwsr == config.browser.toString() }
         baseTest.extent = config.reporting?.extent ?: ExtentConfig("STANDARD", null, "", true)

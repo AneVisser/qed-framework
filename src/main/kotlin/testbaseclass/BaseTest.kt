@@ -2,7 +2,6 @@ package qed.testbaseclass
 
 import ExtentConfig
 import com.aventstack.extentreports.ExtentTest
-import com.aventstack.extentreports.Status
 import org.testng.SkipException
 import org.testng.annotations.AfterMethod
 import qed.reports.Logger
@@ -15,7 +14,8 @@ fun uniqueTestName() = UUID.randomUUID().toString() + System.currentTimeMillis()
 open class BaseTest(val uniqueClassName : String = uniqueTestName() ) : IBaseTest {
 
     override val logger = Logger()
-    lateinit var environment : Map<String, String>
+    lateinit var envURLs : Map<String, String>
+    lateinit var configEnv : String
     lateinit var extentTest : ExtentTest
     lateinit var methodName : String
     lateinit var extent : ExtentConfig
@@ -23,7 +23,7 @@ open class BaseTest(val uniqueClassName : String = uniqueTestName() ) : IBaseTes
     // configuration variables:
     val url: (String) -> String = { key ->
         try {
-            environment.get(key).toString()
+            envURLs.get(key).toString()
         } catch(e: Exception) {
             e.message.toString()
         }
