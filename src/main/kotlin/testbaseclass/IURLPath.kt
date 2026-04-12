@@ -22,6 +22,7 @@ interface IURLPath {
 sealed class PayloadKind {
     data class Single(val type: KClass<*>) : PayloadKind()
     data class ListOf(val type: KClass<*>) : PayloadKind()
+    data class ParameterizedOf(val outerType: Class<*>, val innerType: Class<*>) : PayloadKind()
 }
 
 

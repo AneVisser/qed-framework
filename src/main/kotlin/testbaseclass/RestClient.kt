@@ -1,5 +1,6 @@
 package qed.testbaseclass
 
+import com.squareup.moshi.Types
 import io.restassured.http.ContentType
 import io.restassured.module.kotlin.extensions.Extract
 import io.restassured.module.kotlin.extensions.Given
@@ -97,6 +98,9 @@ class RestClient(var url : String, val logger : Logger, val baseTest: BaseTest) 
                         }
                     }
                 }
+                is PayloadKind.ParameterizedOf ->
+                    // ParameterizedOf is a response wrapper type — no request body validation needed
+                    Unit
                 null -> if (urlPath.method == RequestType.POST || urlPath.method == RequestType.PUT)
                     logger.warn { "no PayloadKind defined for $urlPath" }
             }
@@ -187,6 +191,11 @@ class RestClient(var url : String, val logger : Logger, val baseTest: BaseTest) 
                 is PayloadKind.ListOf -> {
                     val list = QEDJson.decodeSafelyList(kind.type, json)
                     list as T
+                }
+                is PayloadKind.ParameterizedOf -> {
+                    val type = Types.newParameterizedType(kind.outerType, kind.innerType)
+                    val adapter = QEDJson.moshi.adapter<T>(type)
+                    adapter.fromJson(json) ?: throw IllegalStateException("Deserialization returned null for ${urlPath.route}")
                 }
                 else -> {
                     QEDJson.decodeSafely(T::class, json)
