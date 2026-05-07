@@ -17,11 +17,18 @@ import java.util.*
 class BrowserDriver(val uniqueClassName : String, val browserName: BrowserName) {
 
     var playwright: Playwright = Playwright.create()
+    // Run headless on CI or when env var QED_HEADLESS is set; headed otherwise
+    val headless = System.getenv("QED_HEADLESS")?.equals("true", ignoreCase = true) ?: false
+
     var browser: Browser = browserType
         .launch(
             BrowserType.LaunchOptions()
-                .setHeadless(false)
-                .setArgs(mutableListOf("--start-maximized"))
+                .setHeadless(headless)
+                .setArgs(mutableListOf(
+                    "--start-maximized",
+                    "--no-sandbox",
+                    "--disable-setuid-sandbox"
+                ))
         )
 
     var context: BrowserContext = browser.newContext()
