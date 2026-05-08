@@ -68,9 +68,7 @@ nav:
       - Core constructs: dsl/core-constructs.md
       - Idiomatic patterns: dsl/idiomatic-patterns.md
       - JSON utilities: dsl/jsonutils.md
-  - Configuring SUT's:
-      - SUT Profiles: sut/sut-profiles.md 
-      - Reporting: sut/reporting.md
+  - Configuring SUT's: sut/sut-profiles.md
   - Page Objects: page-objects/screen-area-composition.md
   - REST & TDD:
       - Setup: rest/setup.md

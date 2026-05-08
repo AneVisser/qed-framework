@@ -6,61 +6,49 @@ Before you dive into QED, make sure your system meets the minimum requirements. 
 
 ## System Requirements
 
-| Component     | Recommended                                         | Minimum Viable                     |
-|--------------|-----------------------------------------------------|------------------------------------|
-| OS           | Windows 11 / macOS Ventura / Ubuntu 22.04           | Windows 10 / macOS Monterey / Ubuntu 20.04 |
-| RAM          | 16 GB                                               | 8 GB                               |
-| CPU          | Quad-core (Intel i5/Ryzen 5 or better)              | Dual-core                          |
-| Disk Space   | 2–4 GB for repo, dependencies, reports              | 1 GB                               |
-| Display      | Full HD (1920×1080) or higher (dual setup is ideal) | 1366×768                           |
+| Component  | Recommended                               | Minimum                                    |
+|------------|-------------------------------------------|--------------------------------------------|
+| OS         | Windows 11 / macOS Ventura / Ubuntu 22.04 | Windows 10 / macOS Monterey / Ubuntu 20.04 |
+| RAM        | 16 GB                                     | 8 GB                                       |
+| CPU        | Quad-core (Intel i5 / Ryzen 5 or better)  | Dual-core                                  |
+| Disk Space | 2–4 GB for repo, dependencies, reports    | 1 GB                                       |
+| Display    | Full HD (1920×1080) or higher             | 1366×768                                   |
 
-> _Note: QED tests may launch browsers and run concurrent threads — more RAM and CPU cores help._
+> QED tests may launch browsers and run concurrent threads — more RAM and CPU cores improve performance.
 
 ---
 
 ## Software Requirements
 
-| Tool             | Version / Notes                      |
-|------------------|--------------------------------------|
-| **Java JDK**     | 17 or higher (LTS recommended)       |
-| **IntelliJ IDEA**| Community Edition or Ultimate        |
-| **Gradle**       | Wrapper included — no install needed |
-| **Git**          | Latest stable version                |
-| **Chrome/Firefox** | For browser-based UI testing       |
+| Tool              | Version / Notes                               |
+|-------------------|-----------------------------------------------|
+| **Java JDK**      | 22 or higher                                  |
+| **IntelliJ IDEA** | Community Edition or Ultimate                 |
+| **Gradle**        | Wrapper included — no separate install needed |
+| **Git**           | Latest stable version                         |
 
 ---
 
 ## Platform Notes
 
 ### Windows
-- Tested on Windows 11 and native setup.
-- Ensure environment variables (`JAVA_HOME`, `PATH`) are correctly set.
+Tested on Windows 10 and Windows 11. Ensure `JAVA_HOME` is set correctly in system environment variables and that the `bin` directory is on your `PATH`.
 
 ### macOS
-- Works well with Homebrew-installed Java and Git.
-- IntelliJ auto-detects Gradle wrapper.
+Works well with Homebrew-installed Java and Git. IntelliJ auto-detects the Gradle wrapper.
 
 ### Linux (Ubuntu/Debian)
-- Install Java via `apt` or SDKMAN.
-- Chrome/Firefox may need additional dependencies (e.g. `libnss3`, `chromedriver`).
+Install Java via `apt` or SDKMAN. Playwright requires a set of native system libraries — see [CI/CD Runner Setup](../cicd/cicd-runner-setup.md) for the full list.
 
-> _You may need to grant execution permissions to Gradle wrapper: `chmod +x gradlew`_
-
----
-
-## Optional Tools
-
-- **Docker**: For isolated SUT environments (future support)
-- **MkDocs**: If contributing to QED documentation
+> On Linux you may need to grant execution permissions to the Gradle wrapper: `chmod +x gradlew`
 
 ---
 
-## Verifying Setup
+## Verifying Your Setup
 
-Once installed, run:
+Once the tools are installed, confirm everything is on your `PATH`:
 
 ```shell
 java -version
 git --version
-./gradlew --version
 ```
