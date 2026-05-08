@@ -73,15 +73,7 @@ nav:
   - Configuring SUT's: 
       - SUT Profiles: sut/sut-profiles.md 
       - Reporting: sut/reporting.md
-  - JS Widgets:
-      - Page elements: widgets/page-elements.md  
-      - Supported JS Widgets Systems: widgets/supported-systems.md
-      - Locator Strategies: widgets/locator-strategies.md
-      - Widget Abstractions: widgets/widget-abstractions.md
-  - Page Objects: 
-      - Screen Area Composition: page-objects/screen-area-composition.md
-      - Avoiding Duplication: page-objects/avoiding-duplication.md
-      - Best Practices: page-objects/best-practices.md
+  - Page Objects: page-objects/screen-area-composition.md
   - REST & TDD:
       - Setup: rest/setup.md
       - DSL for APIs: rest/dsl-for-apis.md
@@ -90,16 +82,13 @@ nav:
       - Sharing with Ktor: rest/ktor_sharing.md
       - testing EMails with Mailpit: rest/testing-emails.md
       - setting up Mailpit: rest/setup-mailpit.md
+  - CI/CD:
+      - CI/CD Overview & Runner Setup: ci-cd/runner-setup.md
+      - Wiring Tests into a Deploy Pipeline: ci-cd/wiring-tests.md
   - Philosophy:
       - Origin Story: philosophy/origin-story.md
       - Design Principles: philosophy/design-principles.md
       - Behaviour driven style: philosophy/bdd.md
-      - Legacy Frustrations: philosophy/legacy-frustrations.md
-  - Architecture:
-      - Project Structure: architecture/project-structure.md 
-      - Extensibility: architecture/extensibility.md
-      - Plugin System: architecture/plugin-system.md
-      - Thread Safety & Concurrency: architecture/thread-safety.md
   - Reporting:
       - ExtentReports Setup: reporting/extent-reports.md
       - CI Pipelines: reporting/ci-pipelines.md

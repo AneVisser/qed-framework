@@ -1,16 +1,16 @@
-The suite has been setup so that URL paths, and associated information can be shared with a real application.
-That way, we can build an integration-safe architecture. This means a Ktor client and Ktor routes 
-always operate on the same typed definitions that have already been validated in your test framework.
+# Sharing with Ktor
 
-That way, the test framework is turned into a verified contract layer between your Ktor app and the REST endpoints 
-and we know that all endpoints used in the application have valid tests associated with them.
-If not, it can be seen from the IURLPath enum type for the application where unused records are grayed out.
-The base structure for this is:
+The suite has been set up so that URL paths and associated metadata can be shared with a Ktor application, enabling an integration-safe architecture. This means a Ktor client and Ktor routes always operate on the same typed definitions that have already been validated in your test framework.
 
+The test framework becomes a verified contract layer between your Ktor app and its REST endpoints — ensuring that all endpoints used in the application have valid tests associated with them. Unused records in the `IURLPath` enum will be visibly grayed out in the IDE.
+
+---
+
+## Base Structure
 
 ```kotlin
 interface IURLPath {
-    val route : String
+    val route: String
     val method: RequestType
     val responseKind: PayloadKind?
     val payloadKind: PayloadKind?
@@ -20,61 +20,65 @@ sealed class PayloadKind {
     data class Single(val type: KClass<*>) : PayloadKind()
     data class ListOf(val type: KClass<*>) : PayloadKind()
 }
-
 ```
-IURLPath cantains the url path or route that is used for a base url to define the endpoint.
-An implementation of an enum type containing all available routes in an applcation coule look as follows:
+
+`IURLPath` contains the URL path or route that is combined with a base URL to form the full endpoint. An implementation containing all available routes in an application could look as follows:
 
 ```kotlin
-enum class APIChalURLPath(private val path: String,
-                          override val method: RequestType,
-                          override val responseKind:PayloadKind?,
-                          override val payloadKind: PayloadKind?,
-)
-    : IURLPath {
+enum class APIChalURLPath(
+    private val path: String,
+    override val method: RequestType,
+    override val responseKind: PayloadKind?,
+    override val payloadKind: PayloadKind?,
+) : IURLPath {
     POST_SIM_ENTITIES("/sim/entities", RequestType.POST, Single(Resp_SimEntities::class), Single(SimEntities::class)),
     GET_SIM_ENTITIES("/sim/entities", RequestType.GET, null, null),
     PUT_SIM_ENTITIES("/sim/entities", RequestType.PUT, null, Single(SimEntities::class)),
-    TODOS("/todos", RequestType.GET, null, null)
-    ;
+    TODOS("/todos", RequestType.GET, null, null);
 
     override val route: String
         get() = this.path
 }
 ```
 
-The method describes the method that is used when the URLPath record is passed to
-the RestClient send method. The path or route is what is added to the base url so that the endpoint can be formed.
+`method` describes the HTTP verb used when the URL path record is passed to the `RestClient` send method. `route` is appended to the base URL to form the full endpoint.
 
-The data class type can also be passed to the URL record. That way, we can make a type-safe call to
-the API and not accidentally pass in the wrong Json. If the payloadKind is not null, the send method verifies if the right
-data type is passed. if not, the test will fail.
-The same applies to the response. This can also be typed, so that we know that the response from the 
-serveris cast into the correct record type.
+---
 
-The following example shows how that can be done:
+## Type-Safe Payloads and Responses
+
+Data class types can be declared directly on the URL record, enabling type-safe API calls. If `payloadKind` is not null, the send method verifies that the correct data type is passed — if not, the test will fail. The same applies to the response: declaring `responseKind` ensures the server response is cast into the correct type automatically.
+
 ```kotlin
-data class SimEntities (
-    val title : String,
+data class SimEntities(
+    val title: String,
     val doneStatus: Boolean,
-    val description : String
+    val description: String
 )
+
 data class Resp_SimEntities(
-    val id : Int,
-    val name : String,
+    val id: Int,
+    val name: String,
     val description: String
 )
 
 fun PostTest() {
     val simEntities = SimEntities("create todo process payroll", true, "description")
-    val result : Resp_SimEntities = rest.send(APIChalURLPath.POST_SIM_ENTITIES, simEntities, listOf(201), trackPerformance = true)
+    val result: Resp_SimEntities = rest.send(APIChalURLPath.POST_SIM_ENTITIES, simEntities, listOf(201), trackPerformance = true)
     logger.info { result }
     verify("check response body") {
-        expect((result).name).to.equal("bob")
-        expect((result).id).to.equal(11)
+        expect(result.name).to.equal("bob")
+        expect(result.id).to.equal(11)
     }
 }
 ```
 
-The rest.send function is able to accept the correct data type. There is also a sendUntyped. This can still receive a typed
-payload, but will return a Map<String, Any>> as response.
+---
+
+## Typed vs Untyped Send
+
+`rest.send` accepts a typed payload and returns a typed response as declared on the URL path record.
+
+`rest.sendUntyped` also accepts a typed payload, but returns a `Map<String, Any>` regardless of the declared response type — useful for exploratory or schema-agnostic tests.
+
+See also [REST Setup](rest-setup.md) for the shared directory structure that makes this pattern possible.
