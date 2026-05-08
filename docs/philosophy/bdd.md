@@ -25,11 +25,11 @@ In QED, `Given`, `When`, and `Then` are expressive constructs that help organise
 Given(this, "I log in to MyApp") {
     login(context, "name", "pw")
 }
-When(this, "I create an invoice") {
-    invoice = createInvoice(context, clientNr)
+When(this, "I create a record") {
+    record = createRecord(context, referenceNr)
 }
-Then(this, "I can navigate to the invoice") {
-    searchInvoice(context, invoice)
+Then(this, "I can navigate to the record") {
+    searchRecord(context, record)
 }
 ```
 

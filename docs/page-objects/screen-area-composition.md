@@ -73,17 +73,17 @@ The JS library used by the application is declared in the configuration file:
 
 ## Screen Area Composition
 
-Page objects can be composed of page areas or sub-pages. Shared screen regions — such as a top bar, sidebar, or info panel — only need to be defined once and can be reused across multiple page compositions.
+Page objects can be composed of page areas or sub-pages. Shared screen regions — such as a banner, sidebar, or info panel — only need to be defined once and can be reused across multiple page compositions.
 
 ```kotlin
-val topbar = TopBar(context)
-val sidebarDesktop = SideBarDesktop(context)
+val banner = Banner(context)
+val sidebar = Sidebar(context)
 val infoBar = InfoBar(context)
-val summaryPage = GenericPage(SummaryPage(context, topbar, sidebarDesktop, infoBar))
+val summaryPage = GenericPage(SummaryPage(context, banner, sidebar, infoBar))
 
 onPage(summaryPage) {
     header.userMenu.click()
-    todoList.selectItem("Payroll")
+    todoList.selectItem("Farm")
     createButton.click()
 }
 ```
