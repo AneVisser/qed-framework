@@ -1,51 +1,75 @@
-## These are the foundational building blocks of QED’s DSL:
+# Core Constructs
 
-Every test needs to be declared with a BaseTest property. This initialises everything
-needed for TestNG and ExtentReports.
+These are the foundational building blocks of QED's DSL. Every test starts with a `BaseTest` declaration, which initialises everything needed for TestNG and ExtentReports.
 
-To define the type of test (UI, API or hybrid), you need to declare the following elements:
+---
+
+## Test Context Setup
+
+To define the type of test — UI, API, or hybrid — declare the following elements:
 
 ```kotlin
 private val baseTest = BaseTest()
 private val hasRest = HasRest(baseTest, urlKey = "apichallenges")
 private val hasBrowser = HasBrowser(baseTest, urlKey = "uitestingurl")
 
-class UI_RESTTest : TestContext(baseTest, hasBrowser, hasRest) {
-    private class E2E_UITestingPlayground4Test : TestContext(baseTest, hasBrowser) {
+class MyTest : TestContext(baseTest, hasBrowser, hasRest) {
 
-        @Test(priority = 0, description = "example hybrid test", groups = ["All"])
-        fun fourthTest() {
-            // actual test code
-            hasBrowser?.apply { ... }
-            hasRest?.apply { ... }
+    @Test(priority = 0, description = "example hybrid test", groups = ["All"])
+    fun myHybridTest() {
+        hasBrowser?.apply {
+            // browser interactions here
+        }
+        hasRest?.apply {
+            // API interactions here
         }
     }
 }
 ```
-The "hasBrowser" section gives access to all Browser (e.g. Playwright derived functions) functionality.
-The "hasRest" section gives access to everything related to API testing (e.g. REST Assured derived functions)
 
-## navigateToApp()
-Launches the application under test. Typically used at the start of a UI or hybrid test 
-within a hasBrowser?.apply block.
+- `hasBrowser` — provides access to all browser (Playwright-derived) functionality
+- `hasRest` — provides access to all API testing (REST-derived) functionality
+- Omit either one for a pure UI or pure API test
 
-## startFromPage(\<page object>) { ... }
-Declares the known starting point of a UI test. The lambda with receivers (the dots here)
-provides access to all public properties from the page object that is accessed by StartFromPage.
+---
 
-Ensures the test begins in a predictable state.
+## `navigateToApp()`
 
-## onPage(page object>) { ... }
-Asserts that navigation succeeded. Same rules as StartFromPage applies.
-Scopes subsequent actions to a specific page object.
+Launches the application under test. Used at the start of a UI or hybrid test inside a `hasBrowser?.apply` block.
 
-## verify(\<description>) { ... }
-Performs one or more expectations with a human-readable description.
-Encourages descriptive, intention-revealing assertions.
+---
 
-## expect(...)
-Fluent expectation builder (from "com.winterbe:expekt").
-Supports equality, containment, null checks, and more.
+## `startFromPage(<pageObject>) { ... }`
 
-## rest.send(...)
-Sends RESTful requests using idiomatic Kotlin. Supports all HTTP verbs, status code validation, and JSON payloads.
+Declares the known starting point of a UI test. The lambda with receiver gives access to all public properties and functions of the page object. Ensures the test begins in a predictable state.
+
+---
+
+## `onPage(<pageObject>) { ... }`
+
+Asserts that navigation to a page succeeded, then scopes all subsequent actions to that page object. The same receiver rules apply as for `startFromPage`.
+
+---
+
+## `verify(<description>) { ... }`
+
+Performs one or more expectations grouped under a human-readable description. Encourages descriptive, intention-revealing assertions that are visible in the test report.
+
+---
+
+## `expect(...)`
+
+Fluent expectation builder (from `com.winterbe:expekt`). Supports equality, containment, null checks, and more:
+
+```kotlin
+verify("user should have admin role") {
+    expect(user.name).to.equal("Alice")
+    expect(user.roles).to.contain("admin")
+}
+```
+
+---
+
+## `rest.send(...)`
+
+Sends RESTful requests using idiomatic Kotlin. Supports all HTTP verbs, status code validation, and JSON payloads. See [DSL for APIs](../rest/dsl-for-apis.md) for full usage.

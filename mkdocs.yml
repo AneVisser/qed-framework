@@ -63,14 +63,12 @@ nav:
       - Prerequisites: getting-started/prerequisites.md 
       - Installation: getting-started/installation.md
       - Custom Test Suites: getting-started/customtestsuites.md
-      - First test: getting-started/first-test.md 
   - DSL:
       - Overview: dsl/overview.md
       - Core constructs: dsl/core-constructs.md
       - Idiomatic patterns: dsl/idiomatic-patterns.md
       - JSON utilities: dsl/jsonutils.md
-      - Examples: dsl/examples.md
-  - Configuring SUT's: 
+  - Configuring SUT's:
       - SUT Profiles: sut/sut-profiles.md 
       - Reporting: sut/reporting.md
   - Page Objects: page-objects/screen-area-composition.md
@@ -96,10 +94,10 @@ nav:
 #      - Overview: ai/overview.md
 #      - Ollama: ai/ollama.md
 #      - Architecture: ai/architecture.md
-  - Tutorials:
-      - Step-by-Step Guides: tutorials/step-by-step.md
-      - Real-World Scenarios: tutorials/real-world-scenarios.md
-      - Common Pitfalls: tutorials/common-pitfalls.md
+#  - Tutorials:
+#      - Step-by-Step Guides: tutorials/step-by-step.md
+#      - Real-World Scenarios: tutorials/real-world-scenarios.md
+#      - Common Pitfalls: tutorials/common-pitfalls.md
   - Community:
       - How to Contribute: community/how-to-contribute.md
       - Roadmap: community/roadmap.md
