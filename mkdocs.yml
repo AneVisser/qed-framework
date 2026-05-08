@@ -91,12 +91,11 @@ nav:
       - Behaviour driven style: philosophy/bdd.md
   - Reporting:
       - ExtentReports Setup: reporting/extent-reports.md
-      - CI Pipelines: reporting/ci-pipelines.md
-      - Test Tags & Filtering: reporting/test-tags.md
-  - AI:
-      - Overview: ai/overview.md
-      - Ollama: ai/ollama.md
-      - Architecture: ai/architecture.md
+#      - Test Tags & Filtering: reporting/test-tags.md
+#  - AI:
+#      - Overview: ai/overview.md
+#      - Ollama: ai/ollama.md
+#      - Architecture: ai/architecture.md
   - Tutorials:
       - Step-by-Step Guides: tutorials/step-by-step.md
       - Real-World Scenarios: tutorials/real-world-scenarios.md
