@@ -33,24 +33,24 @@ and exposes them via a web UI and REST API that QED tests query.
 
 vm-mailpit has three network adapters:
 
-| Adapter | Type | IP | Used by |
-|---------|------|----|---------|
-| NIC 1 (enp0s3) | NAT | DHCP | Internet access (binary download, updates) |
-| NIC 2 (enp0s8) | Host-Only | 192.168.56.13 | SMTP from other VMs, Windows host browser, QED tests |
-| NIC 3 (enp0s9) | Bridged | 192.168.50.104 | SMTP from local dev backend on Windows, other LAN devices |
+| Adapter        | Type      | IP                     | Used by                                                   |
+|----------------|-----------|------------------------|-----------------------------------------------------------|
+| NIC 1 (enp0s3) | NAT       | DHCP                   | Internet access (binary download, updates)                |
+| NIC 2 (enp0s8) | Host-Only | <mailpit-host-only-ip> | SMTP from other VMs, Windows host browser, QED tests      |
+| NIC 3 (enp0s9) | Bridged   | <mailpit-lan-ip>         | SMTP from local dev backend on Windows, other LAN devices |
 
 **Address reference by caller:**
 
-| Caller | Address to use | Reason |
-|--------|---------------|--------|
-| Other VMs (SMTP) | `192.168.56.13:1025` | Host-only inter-VM network |
-| Windows host browser / QED tests | `192.168.56.13:8025` | Host-only (bridged VMs unreachable from own host) |
-| Local dev backend on Windows (SMTP) | `192.168.50.104:1025` | Bridged LAN — Windows cannot reach host-only to VM |
-| Other LAN devices | `192.168.50.104:8025` | Bridged LAN |
+| Caller                              | Address to use                | Reason                                             |
+|-------------------------------------|-------------------------------|----------------------------------------------------|
+| Other VMs (SMTP)                    | `<mailpit-host-only-ip>:1025` | Host-only inter-VM network                         |
+| Windows host browser / QED tests    | `<mailpit-host-only-ip>:8025` | Host-only (bridged VMs unreachable from own host)  |
+| Local dev backend on Windows (SMTP) | `<mailpit-lan-ip>:1025`       | Bridged LAN — Windows cannot reach host-only to VM |
+| Other LAN devices                   | `<mailpit-lan-ip>:8025`       | Bridged LAN                                        |
 
 **Important:** VirtualBox bridged VMs cannot communicate with their own host machine
-through the bridged adapter. Always use the host-only IP (`192.168.56.13`) from the
-Windows host machine. `ping 192.168.50.104` from the Windows host will not respond —
+through the bridged adapter. Always use the host-only IP (`<mailpit-host-only-ip>`) from the
+Windows host machine. `ping <mailpit-lan-ip>` from the Windows host will not respond —
 this is expected and does not indicate a problem.
 
 ---
@@ -113,10 +113,10 @@ network:
       dhcp4: true
     enp0s8:
       addresses:
-        - 192.168.56.13/24
+        - <mailpit-host-only-ip>/24
     enp0s9:
       addresses:
-        - 192.168.50.104/24
+        - <mailpit-lan-ip>/24
 ```
 
 **Important:** Do NOT add a default gateway to `enp0s9` — the NAT adapter (`enp0s3`)
@@ -132,14 +132,14 @@ sudo netplan apply
 Verify both IPs are assigned:
 
 ```bash
-ip addr show enp0s8    # should show 192.168.56.13
-ip addr show enp0s9    # should show 192.168.50.104
+ip addr show enp0s8    # should show <mailpit-host-only-ip>
+ip addr show enp0s9    # should show <mailpit-lan-ip>
 ```
 
 Verify from Windows (host-only only — bridged will not respond from own host):
 
 ```powershell
-ping 192.168.56.13
+ping <mailpit-host-only-ip>
 ```
 
 ---
@@ -211,7 +211,7 @@ sudo ufw enable
 From the Windows host, open a browser:
 
 ```
-http://192.168.56.13:8025
+http://<mailpit-host-only-ip>:8025
 ```
 
 You should see the Mailpit inbox (empty at this point).
@@ -263,16 +263,16 @@ sudo journalctl -u mailpit -n 30 --no-pager
 Common cause: port 1025 or 8025 already in use.
 Check: `ss -tlnp | grep -E '1025|8025'`
 
-**Web UI unreachable from Windows (`192.168.56.13:8025`):**
+**Web UI unreachable from Windows (`<mailpit-host-only-ip>:8025`):**
 - Confirm Mailpit is running and listening: `ss -tlnp | grep 8025`
 - Check firewall: `sudo ufw status`
-- Try SSH connectivity first: `ssh admin@192.168.56.13`
-- Do NOT troubleshoot using `192.168.50.104` from the Windows host — it will never
+- Try SSH connectivity first: `ssh admin@<mailpit-host-only-ip>`
+- Do NOT troubleshoot using `<mailpit-lan-ip>` from the Windows host — it will never
   respond from the host machine (VirtualBox limitation, not a problem)
 
-**`ping 192.168.50.104` from Windows doesn't respond:**
+**`ping <mailpit-lan-ip>` from Windows doesn't respond:**
 - Expected — VirtualBox bridged VMs cannot communicate with their own host through
-  the bridged adapter. Use `192.168.56.13` from Windows.
+  the bridged adapter. Use `<mailpit-host-only-ip>` from Windows.
 - To confirm the bridged adapter is working, ping from another VM or another LAN device.
 
 **NIC 3 promiscuous mode shows `deny` after reboot:**
@@ -287,9 +287,9 @@ Check: `ss -tlnp | grep -E '1025|8025'`
 - [ ] Ubuntu 24.04 LTS Server installed, OpenSSH enabled
 - [ ] Three network adapters configured: NAT, host-only, bridged
 - [ ] NIC 3 promiscuous mode set to `allow-all`
-- [ ] Static IPs assigned: `192.168.56.13` (host-only), `192.168.50.104` (LAN)
+- [ ] Static IPs assigned: `<mailpit-host-only-ip>` (host-only), `<mailpit-lan-ip>` (LAN)
 - [ ] Mailpit binary installed at `/usr/local/bin/mailpit`
 - [ ] Mailpit systemd service enabled and running
 - [ ] Ports 22, 1025, and 8025 open in ufw
-- [ ] Web UI accessible at `http://192.168.56.13:8025` from Windows host
+- [ ] Web UI accessible at `http://<mailpit-host-only-ip>:8025` from Windows host
 - [ ] Application SMTP configured to point at Mailpit (see SUT CI/CD guide)
