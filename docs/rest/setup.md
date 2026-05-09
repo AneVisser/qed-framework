@@ -197,7 +197,7 @@ for untyped requests or responses. Use `Single` for objects and `ListOf` for arr
 Route paths are plain strings, with placeholders for parameters in curly brackets. QED supports
 embedded parameters, for example `/api/calculate/{farmId}/pasture`.
 
-See also [Sharing with Ktor](sharing-with-ktor.md).
+See also [Sharing with Ktor](ktor-sharing.md).
 
 ---
 

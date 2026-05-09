@@ -81,4 +81,4 @@ fun PostTest() {
 
 `rest.sendUntyped` also accepts a typed payload, but returns a `Map<String, Any>` regardless of the declared response type — useful for exploratory or schema-agnostic tests.
 
-See also [REST Setup](rest-setup.md) for the shared directory structure that makes this pattern possible.
+See also [REST Setup](setup.md) for the shared directory structure that makes this pattern possible.

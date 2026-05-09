@@ -38,7 +38,7 @@ Tested on Windows 10 and Windows 11. Ensure `JAVA_HOME` is set correctly in syst
 Works well with Homebrew-installed Java and Git. IntelliJ auto-detects the Gradle wrapper.
 
 ### Linux (Ubuntu/Debian)
-Install Java via `apt` or SDKMAN. Playwright requires a set of native system libraries — see [CI/CD Runner Setup](../cicd/cicd-runner-setup.md) for the full list.
+Install Java via `apt` or SDKMAN. Playwright requires a set of native system libraries — see [CI/CD Runner Setup](../cicd/runner-setup.md) for the full list.
 
 > On Linux you may need to grant execution permissions to the Gradle wrapper: `chmod +x gradlew`
 
