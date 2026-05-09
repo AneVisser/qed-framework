@@ -1,5 +1,5 @@
 <div style="text-align: center; padding-bottom: 40px;">
-  <img src="images/QED_Logo_mixedcolor.svg" alt="QED Logo" width="400"/>
+  <img src="./images/QED_Logo_mixedcolor.svg" alt="QED Logo" width="400"/>
 </div>
 
 # Modern DSL-driven testing. Minimalist, maintainable, and made for scale.
