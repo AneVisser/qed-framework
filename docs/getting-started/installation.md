@@ -9,6 +9,7 @@ Welcome to QED — a modern, Kotlin-based test automation framework designed for
 QED uses a multi-repository architecture:
 
 - **qed-framework** — the public, reusable test framework (includes `qed-demos/` as a working example)
+- **QED-Shared** — shared data classes used across the framework and SUT repositories
 - **SUT repositories** — private repos for each System Under Test, each depending on the framework via Gradle composite builds
 
 All repos are designed to sit as siblings on disk:
@@ -49,14 +50,19 @@ git --version
 
 ---
 
-## Step 1: Clone the QED Framework
+## Step 1: Clone the QED Repositories
 
-If GitHub asks for credentials, follow the prompts and enter the credentials that were given.
+Clone the framework, then clone QED-Shared inside it. Both need to sit within the same root directory for the Gradle composite build to resolve correctly.
 
 ```shell
 git clone https://github.com/AneVisser/qed-framework.git QEDFramework
 cd QEDFramework
+git clone https://github.com/AneVisser/QED-Shared.git
 ```
+
+`QED-Shared` contains shared data classes that the framework and your SUT repositories depend on. When you add your own SUT repos later, clone them here as siblings of `QED-Shared`.
+
+If GitHub asks for credentials, follow the prompts and enter your credentials.
 
 ---
 
