@@ -8,7 +8,7 @@ use_directory_urls: false
 
 theme:
   name: material
-  logo: ./images/QED_Logo_Only.svg
+  logo: ./images/QED_Logo_only.svg
   features:
     - navigation.tabs
     - navigation.tabs.sticky
