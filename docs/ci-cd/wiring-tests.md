@@ -1,6 +1,6 @@
 # Wiring Tests into a Deploy Pipeline
 
-This page covers how to structure QED test workflows and integrate them into a GitHub Actions deploy pipeline. It assumes the runner is already set up as described in [CI/CD Overview & Runner Setup](cicd-runner-setup.md).
+This page covers how to structure QED test workflows and integrate them into a GitHub Actions deploy pipeline. It assumes the runner is already set up as described in [CI/CD Overview & Runner Setup](runner-setup.md).
 
 ---
 

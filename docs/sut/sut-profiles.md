@@ -93,7 +93,7 @@ Supported values are `chromium`, `firefox`, and `webkit`, depending on your Play
 | `documentTitle` | string | Browser tab title |
 | `enableScreenshots` | `true`, `false` | Captures screenshots on test failure |
 
-See [ExtentReports Setup](../reporting/extentreports-setup.md) for full reporting documentation.
+See [ExtentReports Setup](../reporting/extent-reports.md) for full reporting documentation.
 
 ---
 
@@ -115,7 +115,7 @@ See [ExtentReports Setup](../reporting/extentreports-setup.md) for full reportin
 | `maxRunsPerCommit` | Number of runs to retain per commit |
 | `maxCommitsToKeep` | Number of commits to retain in performance history |
 
-See [Performance Testing](../rest/performance-testing.md) for full performance history documentation.
+See [Performance Testing](../rest/performance.md) for full performance history documentation.
 
 ---
 
