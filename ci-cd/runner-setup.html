@@ -1,0 +1,1457 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://anevisser.github.io/qed-framework/ci-cd/runner-setup.html">
+      
+      
+        <link rel="prev" href="../rest/setup-mailpit.html">
+      
+      
+        <link rel="next" href="wiring-tests.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>CI/CD Overview & Runner Setup - QED Test Automation Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/custom.css">
+    
+      <link rel="stylesheet" href="../assets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="lightblue" data-md-color-accent="lime">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cicd-overview-runner-setup" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="QED Test Automation Framework" class="md-header__button md-logo" aria-label="QED Test Automation Framework" data-md-component="logo">
+      
+  <img src="../images/qed_logo_only.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            QED Test Automation Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CI/CD Overview & Runner Setup
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/AneVisser/qed-framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    QED
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../getting-started/prerequisites.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../dsl/overview.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  DSL
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../sut/sut-profiles.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Configuring SUT's
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../page-objects/screen-area-composition.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Page Objects
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../rest/setup.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  REST & TDD
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="runner-setup.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  CI/CD
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../philosophy/origin-story.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Philosophy
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../reporting/extent-reports.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reporting
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../community/how-to-contribute.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Community
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="QED Test Automation Framework" class="md-nav__button md-logo" aria-label="QED Test Automation Framework" data-md-component="logo">
+      
+  <img src="../images/qed_logo_only.svg" alt="logo">
+
+    </a>
+    QED Test Automation Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/AneVisser/qed-framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    QED
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../getting-started/prerequisites.html" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../dsl/overview.html" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DSL
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sut/sut-profiles.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuring SUT's
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page-objects/screen-area-composition.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Page Objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../rest/setup.html" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REST & TDD
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI/CD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CI/CD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI/CD Overview & Runner Setup
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="runner-setup.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI/CD Overview & Runner Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-a-self-hosted-runner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why a Self-Hosted Runner?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runner-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Runner Installation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java Setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playwright-system-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playwright System Libraries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playwright-browser-binaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playwright Browser Binaries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssh-key-for-private-repositories" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSH Key for Private Repositories
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#secrets-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secrets Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment Variables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-key-convention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment Key Convention
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="wiring-tests.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wiring Tests into a Deploy Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../philosophy/origin-story.html" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Philosophy
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../reporting/extent-reports.html" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reporting
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../community/how-to-contribute.html" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="cicd-overview-runner-setup">CI/CD Overview &amp; Runner Setup<a class="headerlink" href="#cicd-overview-runner-setup" title="Permanent link">&para;</a></h1>
+<p>QED test suites are designed to run on a <strong>self-hosted GitHub Actions runner</strong>. This page covers why that is required, how to set one up, and how to configure it for both API and UI test execution.</p>
+<hr />
+<h2 id="why-a-self-hosted-runner">Why a Self-Hosted Runner?<a class="headerlink" href="#why-a-self-hosted-runner" title="Permanent link">&para;</a></h2>
+<p>GitHub-hosted runners are ephemeral — they are wiped after every job. This makes them unsuitable for QED for two reasons:</p>
+<ul>
+<li><strong>Playwright system libraries</strong> — Chromium requires a set of native Linux libraries that are not present on GitHub-hosted Ubuntu runners by default. Installing them on every run adds significant overhead.</li>
+<li><strong>Persistent cache</strong> — Gradle dependencies and Playwright browser binaries are large. On a self-hosted runner they persist between runs naturally, without any cache upload/download overhead.</li>
+</ul>
+<p>A self-hosted runner on a stable VM is the recommended approach.</p>
+<hr />
+<h2 id="runner-installation">Runner Installation<a class="headerlink" href="#runner-installation" title="Permanent link">&para;</a></h2>
+<p>These instructions assume Ubuntu 24.04 LTS. The runner should be installed as a service so it starts automatically on reboot.</p>
+<p><strong>Step 1: Create a runner user</strong></p>
+<p>It is good practice to run the GitHub Actions runner as a dedicated non-root user:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1">sudo<span class="w"> </span>useradd<span class="w"> </span>-m<span class="w"> </span>-s<span class="w"> </span>/bin/bash<span class="w"> </span>runner
+</span><span id="__span-0-2">sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>sudo<span class="w"> </span>runner
+</span></code></pre></div>
+<p><strong>Step 2: Download and configure the runner</strong></p>
+<p>In GitHub, go to your repository → <strong>Settings → Actions → Runners → New self-hosted runner</strong>. Select Linux and follow the generated instructions. They will look similar to:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1">mkdir<span class="w"> </span>actions-runner<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>actions-runner
+</span><span id="__span-1-2">curl<span class="w"> </span>-o<span class="w"> </span>actions-runner-linux-x64.tar.gz<span class="w"> </span>-L<span class="w"> </span>https://github.com/actions/runner/releases/download/v2.x.x/actions-runner-linux-x64-2.x.x.tar.gz
+</span><span id="__span-1-3">tar<span class="w"> </span>xzf<span class="w"> </span>./actions-runner-linux-x64.tar.gz
+</span><span id="__span-1-4">./config.sh<span class="w"> </span>--url<span class="w"> </span>https://github.com/&lt;your-org&gt;/&lt;your-repo&gt;<span class="w"> </span>--token<span class="w"> </span>&lt;generated-token&gt;
+</span></code></pre></div>
+<p><strong>Step 3: Install as a service</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1">sudo<span class="w"> </span>./svc.sh<span class="w"> </span>install
+</span><span id="__span-2-2">sudo<span class="w"> </span>./svc.sh<span class="w"> </span>start
+</span></code></pre></div>
+<p>Verify it is running:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1">sudo<span class="w"> </span>./svc.sh<span class="w"> </span>status
+</span></code></pre></div>
+<p>The runner should appear as <strong>Idle</strong> in GitHub under Settings → Actions → Runners.</p>
+<hr />
+<h2 id="java-setup">Java Setup<a class="headerlink" href="#java-setup" title="Permanent link">&para;</a></h2>
+<p>QED requires Java 22. Install Temurin via SDKMAN or directly:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1">sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>wget<span class="w"> </span>apt-transport-https
+</span><span id="__span-4-2">wget<span class="w"> </span>-qO<span class="w"> </span>-<span class="w"> </span>https://packages.adoptium.net/artifactory/api/gpg/key/public<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/trusted.gpg.d/adoptium.asc
+</span><span id="__span-4-3"><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;deb https://packages.adoptium.net/artifactory/deb </span><span class="k">$(</span>lsb_release<span class="w"> </span>-cs<span class="k">)</span><span class="s2"> main&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/adoptium.list
+</span><span id="__span-4-4">sudo<span class="w"> </span>apt<span class="w"> </span>update
+</span><span id="__span-4-5">sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>temurin-22-jdk
+</span><span id="__span-4-6">java<span class="w"> </span>-version
+</span></code></pre></div>
+<hr />
+<h2 id="playwright-system-libraries">Playwright System Libraries<a class="headerlink" href="#playwright-system-libraries" title="Permanent link">&para;</a></h2>
+<p>UI tests use Playwright to drive Chromium. On Ubuntu 24.04, a set of native system libraries must be installed for Chromium to launch. Without these, the browser will fail to start with a missing library error.</p>
+<p>Install the required libraries:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1">sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-2"><span class="w">  </span>libatk1.0-0<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-3"><span class="w">  </span>libatk-bridge2.0-0<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-4"><span class="w">  </span>libcups2<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-5"><span class="w">  </span>libdrm2<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-6"><span class="w">  </span>libxkbcommon0<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-7"><span class="w">  </span>libxcomposite1<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-8"><span class="w">  </span>libxdamage1<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-9"><span class="w">  </span>libxfixes3<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-10"><span class="w">  </span>libxrandr2<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-11"><span class="w">  </span>libgbm1<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-12"><span class="w">  </span>libpango-1.0-0<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-13"><span class="w">  </span>libcairo2<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-14"><span class="w">  </span>libasound2t64<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-15"><span class="w">  </span>libnspr4<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-16"><span class="w">  </span>libnss3<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-17"><span class="w">  </span>libx11-xcb1<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-18"><span class="w">  </span>libxcb-dri3-0
+</span></code></pre></div>
+<p>These only need to be installed once on the runner VM. They persist between runs.</p>
+<hr />
+<h2 id="playwright-browser-binaries">Playwright Browser Binaries<a class="headerlink" href="#playwright-browser-binaries" title="Permanent link">&para;</a></h2>
+<p>On the first run, Playwright will download Chromium binaries to <code>~/.cache/ms-playwright</code>. This happens automatically — no manual step is needed. The binaries persist on the self-hosted runner between runs, so subsequent runs are fast.</p>
+<blockquote>
+<p>Do not add a Playwright cache step to your workflow. On a self-hosted runner, caching adds upload/download overhead with no benefit — the binaries already persist on disk.</p>
+</blockquote>
+<p>The same applies to Gradle dependencies — do not add a Gradle cache step to workflows running on a self-hosted runner.</p>
+<hr />
+<h2 id="ssh-key-for-private-repositories">SSH Key for Private Repositories<a class="headerlink" href="#ssh-key-for-private-repositories" title="Permanent link">&para;</a></h2>
+<p>QED test suites typically depend on private shared repositories (e.g. <code>QED-Shared</code>, <code>QED-Shared-&lt;app&gt;</code>). The runner checks these out during the workflow using an SSH deploy key.</p>
+<p><strong>Step 1: Generate a key pair on the runner</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1">ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;github-actions-runner&quot;</span><span class="w"> </span>-f<span class="w"> </span>~/.ssh/id_ed25519<span class="w"> </span>-N<span class="w"> </span><span class="s2">&quot;&quot;</span>
+</span></code></pre></div>
+<p><strong>Step 2: Add the public key as a deploy key</strong></p>
+<p>Copy the public key:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1">cat<span class="w"> </span>~/.ssh/id_ed25519.pub
+</span></code></pre></div>
+<p>Add it to each private repository that the runner needs to access: <strong>GitHub repo → Settings → Deploy keys → Add deploy key</strong>. Enable "Allow read access".</p>
+<p><strong>Step 3: Add the private key as a repository secret</strong></p>
+<p>Use the GitHub CLI to avoid copy-paste issues with multiline keys:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1">gh<span class="w"> </span>secret<span class="w"> </span><span class="nb">set</span><span class="w"> </span>RUNNER_SSH_PRIVATE_KEY<span class="w"> </span>--repo<span class="w"> </span>&lt;your-org&gt;/&lt;your-repo&gt;<span class="w"> </span>&lt;<span class="w"> </span>~/.ssh/id_ed25519
+</span></code></pre></div>
+<p>This secret must be present in every repository whose workflow calls a QED test workflow via <code>workflow_call</code>, since <code>secrets: inherit</code> only passes down secrets that exist in the calling repository.</p>
+<hr />
+<h2 id="secrets-configuration">Secrets Configuration<a class="headerlink" href="#secrets-configuration" title="Permanent link">&para;</a></h2>
+<p>The following secrets are required in any repository that calls a QED UI test workflow. Add them under <strong>Settings → Secrets and variables → Actions</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Secret</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RUNNER_SSH_PRIVATE_KEY</code></td>
+<td>SSH key for checking out private QED repos</td>
+</tr>
+<tr>
+<td><code>QED_PASSWORD_ADMIN</code></td>
+<td>Password for the admin test user</td>
+</tr>
+<tr>
+<td><code>QED_PASSWORD_MANAGER</code></td>
+<td>Password for the manager test user</td>
+</tr>
+<tr>
+<td><code>QED_PASSWORD_USER</code></td>
+<td>Password for the standard test user</td>
+</tr>
+<tr>
+<td><code>QED_PASSWORD_PARENT</code></td>
+<td>Password for the parent test user</td>
+</tr>
+</tbody>
+</table>
+<p>Add additional user secrets as needed to match the test users defined in your <code>QED-Shared-&lt;app&gt;</code> module.</p>
+<p>For API-only test workflows, only <code>RUNNER_SSH_PRIVATE_KEY</code> is required unless your tests also use authenticated endpoints.</p>
+<hr />
+<h2 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h2>
+<p>QED uses the following environment variables at runtime:</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Purpose</th>
+<th>CI value</th>
+<th>Local value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>QED_HEADLESS</code></td>
+<td>Controls browser visibility</td>
+<td><code>true</code></td>
+<td>unset (headed)</td>
+</tr>
+<tr>
+<td><code>QED_PASSWORD_*</code></td>
+<td>Test user credentials</td>
+<td>from secrets</td>
+<td>from local env or config</td>
+</tr>
+</tbody>
+</table>
+<p><code>QED_HEADLESS</code> defaults to headed mode when unset, so local runs open a real browser window. Setting it to <code>true</code> in the workflow enables headless mode on CI without any code changes.</p>
+<hr />
+<h2 id="environment-key-convention">Environment Key Convention<a class="headerlink" href="#environment-key-convention" title="Permanent link">&para;</a></h2>
+<p>QED uses short environment keys passed as workflow inputs. The convention used across all workflows is:</p>
+<table>
+<thead>
+<tr>
+<th>Environment</th>
+<th>Key</th>
+<th>Also known as</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Development</td>
+<td><code>dev</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Staging</td>
+<td><code>stag</code></td>
+<td>staging</td>
+</tr>
+<tr>
+<td>Pre-production</td>
+<td><code>preprod</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Production</td>
+<td><code>prod</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>These keys map to entries in your QED project's environment configuration file and must be consistent across your test suite and workflow definitions.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "navigation.prune", "toc.follow", "toc.integrate", "content.code.annotate", "content.math"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10.4.0/dist/mermaid.min.js"></script>
+      
+        <script src="../assets/extra.js"></script>
+      
+    
+  </body>
+</html>
