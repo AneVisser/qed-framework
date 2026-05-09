@@ -662,10 +662,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-clone-the-qed-framework" class="md-nav__link">
+  <a href="#step-1-clone-the-qed-repositories" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 1: Clone the QED Framework
+        Step 1: Clone the QED Repositories
       
     </span>
   </a>
@@ -1233,6 +1233,7 @@
 <p>QED uses a multi-repository architecture:</p>
 <ul>
 <li><strong>qed-framework</strong> — the public, reusable test framework (includes <code>qed-demos/</code> as a working example)</li>
+<li><strong>QED-Shared</strong> — shared data classes used across the framework and SUT repositories</li>
 <li><strong>SUT repositories</strong> — private repos for each System Under Test, each depending on the framework via Gradle composite builds</li>
 </ul>
 <p>All repos are designed to sit as siblings on disk:</p>
@@ -1257,11 +1258,14 @@
 </span><span id="__span-1-2">git<span class="w"> </span>--version
 </span></code></pre></div>
 <hr />
-<h2 id="step-1-clone-the-qed-framework">Step 1: Clone the QED Framework<a class="headerlink" href="#step-1-clone-the-qed-framework" title="Permanent link">&para;</a></h2>
-<p>If GitHub asks for credentials, follow the prompts and enter the credentials that were given.</p>
+<h2 id="step-1-clone-the-qed-repositories">Step 1: Clone the QED Repositories<a class="headerlink" href="#step-1-clone-the-qed-repositories" title="Permanent link">&para;</a></h2>
+<p>Clone the framework, then clone QED-Shared inside it. Both need to sit within the same root directory for the Gradle composite build to resolve correctly.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/AneVisser/qed-framework.git<span class="w"> </span>QEDFramework
 </span><span id="__span-2-2"><span class="nb">cd</span><span class="w"> </span>QEDFramework
+</span><span id="__span-2-3">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/AneVisser/QED-Shared.git
 </span></code></pre></div>
+<p><code>QED-Shared</code> contains shared data classes that the framework and your SUT repositories depend on. When you add your own SUT repos later, clone them here as siblings of <code>QED-Shared</code>.</p>
+<p>If GitHub asks for credentials, follow the prompts and enter your credentials.</p>
 <hr />
 <h2 id="step-2-open-the-framework-in-intellij">Step 2: Open the Framework in IntelliJ<a class="headerlink" href="#step-2-open-the-framework-in-intellij" title="Permanent link">&para;</a></h2>
 <p>Launch IntelliJ IDEA.</p>
