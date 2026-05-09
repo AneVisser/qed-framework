@@ -28,13 +28,13 @@ without any per-project configuration.
 {
   "environments": {
     "dev": {
-      "mailpitBaseUrl": "http://192.168.50.104:8025"
+      "mailpitBaseUrl": "http://<mailpit-lan-ip>:8025"
     },
     "stag": {
-      "mailpitBaseUrl": "http://192.168.56.13:8025"
+      "mailpitBaseUrl": "http://<mailpit-host-only-ip>>:8025"
     },
     "preprod": {
-      "mailpitBaseUrl": "http://192.168.56.13:8025"
+      "mailpitBaseUrl": "http://<mailpit-host-only-ip>>:8025"
     }
   }
 }
@@ -46,13 +46,13 @@ setup needed.
 
 The environment is selected using the same `env.name` system property used by SUT
 configs (`dev` by default). If no entry exists for the current environment, or if
-the config file is missing, `MailpitHelper` falls back to `http://192.168.56.13:8025`
+the config file is missing, `MailpitHelper` falls back to `http://<mailpit-host-only-ip>>:8025`
 with a warning.
 
 **Why two different addresses for dev vs staging/preprod?**
 
-The Mailpit VM has a host-only adapter (`192.168.56.13`) and a LAN/bridged adapter
-(`192.168.50.104`). VirtualBox bridged VMs cannot communicate with their own host
+The Mailpit VM has a host-only adapter (`<mailpit-host-only-ip>>`) and a LAN/bridged adapter
+(`<mailpit-lan-ip>`). VirtualBox bridged VMs cannot communicate with their own host
 machine through the bridged adapter, so:
 - QED tests running on Windows use the host-only address for staging and preprod
 - The local dev backend (a JVM process on Windows) uses the LAN address for SMTP
@@ -77,12 +77,12 @@ It is loaded lazily on first access and shared across all tests in the suite.
 
 ## API Reference
 
-| Method | Endpoint | Purpose |
-|--------|----------|---------|
-| `GET` | `/api/v1/messages` | List all captured messages |
-| `GET` | `/api/v1/message/{id}` | Get full message body by ID |
+| Method   | Endpoint               | Purpose                       |
+|----------|------------------------|-------------------------------|
+| `GET`    | `/api/v1/messages`     | List all captured messages    |
+| `GET`    | `/api/v1/message/{id}` | Get full message body by ID   |
 | `DELETE` | `/api/v1/message/{id}` | Delete a single message by ID |
-| `DELETE` | `/api/v1/messages` | Delete all messages |
+| `DELETE` | `/api/v1/messages`     | Delete all messages           |
 
 Full Mailpit API docs: https://mailpit.axllent.org/docs/api-v1/
 
@@ -229,10 +229,10 @@ SUT environment is targeted.
 
 **The correct model:**
 
-| QED running on | Mailpit URL |
-|---|---|
-| Windows dev machine | `http://192.168.50.104:8025` (LAN — always, regardless of SUT env) |
-| CI runner on vm-staging | `http://192.168.56.13:8025` (host-only — always) |
+| QED running on          | Mailpit URL                                                          |
+|-------------------------|----------------------------------------------------------------------|
+| Windows dev machine     | `http://<mailpit-lan-ip>:8025` (LAN — always, regardless of SUT env) |
+| CI runner on vm-staging | `http://<mailpit-host-only-ip>>:8025` (host-only — always)           |
 
 **Required changes when implementing CI pipeline:**
 
@@ -273,7 +273,7 @@ SUT environment is targeted.
    mkdir -p /home/runner/.qed
    cat > /home/runner/.qed/qed-framework.json << 'EOF'
    {
-     "mailpitBaseUrl": "http://192.168.56.13:8025"
+     "mailpitBaseUrl": "http://<mailpit-host-only-ip>>:8025"
    }
    EOF
    ```
@@ -281,12 +281,12 @@ SUT environment is targeted.
 5. **Windows dev machine config** (`~/.qed/qed-framework.json`):
    ```json
    {
-     "mailpitBaseUrl": "http://192.168.50.104:8025"
+     "mailpitBaseUrl": "http://<mailpit-lan-ip>:8025"
    }
    ```
 
 Until this is implemented, the URL in `src/main/resources/qed-framework.json` should
-be set to `http://192.168.50.104:8025` for running tests from the dev machine.
+be set to `http://<mailpit-lan-ip>:8025` for running tests from the dev machine.
 
 ---
 
@@ -296,10 +296,10 @@ Before Mailpit was available, test-only backend routes existed solely to retriev
 tokens directly from the database. These are now redundant and should be removed once
 Mailpit-based tests are confirmed green:
 
-| Old approach | Replacement |
-|---|---|
+| Old approach                                                          | Replacement                                               |
+|-----------------------------------------------------------------------|-----------------------------------------------------------|
 | `DEV_CONFIRM_EMAIL` test route — retrieves verification token from DB | `MailpitHelper.waitForEmail()` + extract token from email |
-| `DEV_PWRESET_EMAIL` test route — retrieves reset token from DB | `MailpitHelper.waitForEmail()` + extract token from email |
+| `DEV_PWRESET_EMAIL` test route — retrieves reset token from DB        | `MailpitHelper.waitForEmail()` + extract token from email |
 
 Remove the corresponding entries from `kTorURLPath` and the handler methods from the
 backend testing routes file after the replacement tests pass.
@@ -310,8 +310,8 @@ backend testing routes file after the replacement tests pass.
 
 **`waitForEmail` times out:**
 - Check the Mailpit web UI manually — did the email arrive at all?
-    - From dev: `http://192.168.50.104:8025`
-    - From Windows host (staging/preprod): `http://192.168.56.13:8025`
+    - From dev: `http://<mailpit-lan-ip>:8025`
+    - From Windows host (staging/preprod): `http://<mailpit-host-only-ip>>:8025`
 - If the inbox is empty, the problem is in the application SMTP configuration, not QED.
   Check the application logs on the relevant environment.
 - If the email arrived but with the wrong subject or recipient: inspect `Subject` and
@@ -325,11 +325,11 @@ backend testing routes file after the replacement tests pass.
 - Try `email.getString("HTML")` if the plain-text body is minimal.
 
 **Mailpit web UI unreachable:**
-- Verify vm-mailpit is running: SSH to `192.168.56.13` and run
+- Verify vm-mailpit is running: SSH to `<mailpit-host-only-ip>>` and run
   `sudo systemctl status mailpit`
 - Confirm ports are listening: `ss -tlnp | grep -E '1025|8025'`
-- Do NOT use `192.168.50.104` from the Windows host — bridged VMs are unreachable
-  from their own host machine. Use `192.168.56.13` instead.
+- Do NOT use `<mailpit-lan-ip>` from the Windows host — bridged VMs are unreachable
+  from their own host machine. Use `<mailpit-host-only-ip>>` instead.
 
 **Wrong Mailpit URL being used:**
 - Check which environment `env.name` is set to: `System.getProperty("env.name")`

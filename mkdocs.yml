@@ -63,25 +63,13 @@ nav:
       - Prerequisites: getting-started/prerequisites.md 
       - Installation: getting-started/installation.md
       - Custom Test Suites: getting-started/customtestsuites.md
-      - First test: getting-started/first-test.md 
   - DSL:
       - Overview: dsl/overview.md
       - Core constructs: dsl/core-constructs.md
       - Idiomatic patterns: dsl/idiomatic-patterns.md
       - JSON utilities: dsl/jsonutils.md
-      - Examples: dsl/examples.md
-  - Configuring SUT's: 
-      - SUT Profiles: sut/sut-profiles.md 
-      - Reporting: sut/reporting.md
-  - JS Widgets:
-      - Page elements: widgets/page-elements.md  
-      - Supported JS Widgets Systems: widgets/supported-systems.md
-      - Locator Strategies: widgets/locator-strategies.md
-      - Widget Abstractions: widgets/widget-abstractions.md
-  - Page Objects: 
-      - Screen Area Composition: page-objects/screen-area-composition.md
-      - Avoiding Duplication: page-objects/avoiding-duplication.md
-      - Best Practices: page-objects/best-practices.md
+  - Configuring SUT's: sut/sut-profiles.md
+  - Page Objects: page-objects/screen-area-composition.md
   - REST & TDD:
       - Setup: rest/setup.md
       - DSL for APIs: rest/dsl-for-apis.md
@@ -90,28 +78,24 @@ nav:
       - Sharing with Ktor: rest/ktor_sharing.md
       - testing EMails with Mailpit: rest/testing-emails.md
       - setting up Mailpit: rest/setup-mailpit.md
+  - CI/CD:
+      - CI/CD Overview & Runner Setup: ci-cd/runner-setup.md
+      - Wiring Tests into a Deploy Pipeline: ci-cd/wiring-tests.md
   - Philosophy:
       - Origin Story: philosophy/origin-story.md
       - Design Principles: philosophy/design-principles.md
       - Behaviour driven style: philosophy/bdd.md
-      - Legacy Frustrations: philosophy/legacy-frustrations.md
-  - Architecture:
-      - Project Structure: architecture/project-structure.md 
-      - Extensibility: architecture/extensibility.md
-      - Plugin System: architecture/plugin-system.md
-      - Thread Safety & Concurrency: architecture/thread-safety.md
   - Reporting:
       - ExtentReports Setup: reporting/extent-reports.md
-      - CI Pipelines: reporting/ci-pipelines.md
-      - Test Tags & Filtering: reporting/test-tags.md
-  - AI:
-      - Overview: ai/overview.md
-      - Ollama: ai/ollama.md
-      - Architecture: ai/architecture.md
-  - Tutorials:
-      - Step-by-Step Guides: tutorials/step-by-step.md
-      - Real-World Scenarios: tutorials/real-world-scenarios.md
-      - Common Pitfalls: tutorials/common-pitfalls.md
+#      - Test Tags & Filtering: reporting/test-tags.md
+#  - AI:
+#      - Overview: ai/overview.md
+#      - Ollama: ai/ollama.md
+#      - Architecture: ai/architecture.md
+#  - Tutorials:
+#      - Step-by-Step Guides: tutorials/step-by-step.md
+#      - Real-World Scenarios: tutorials/real-world-scenarios.md
+#      - Common Pitfalls: tutorials/common-pitfalls.md
   - Community:
       - How to Contribute: community/how-to-contribute.md
       - Roadmap: community/roadmap.md
