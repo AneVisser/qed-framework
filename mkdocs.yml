@@ -1,6 +1,6 @@
 site_name: QED Test Automation Framework 
-site_url: https://qed-testing.github.io/qed-core/
-repo_url: https://github.com/AneVisser/QED 
+site_url: https://anevisser.github.io/qed-framework/
+repo_url: https://github.com/AneVisser/qed-framework
 repo_name: QED
 docs_dir: docs
 site_dir: site

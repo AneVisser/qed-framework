@@ -1,0 +1,40 @@
+# =============================================================================
+# Deploy MkDocs documentation to GitHub Pages
+#
+# Triggers on every push to main, and can be run manually.
+# Deploys to: https://anevisser.github.io/qed-framework/
+# =============================================================================
+name: Deploy Docs
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    name: Build and Deploy MkDocs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history needed for git-revision-date plugin if added later
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install MkDocs and dependencies
+        run: |
+          pip install mkdocs-material \
+                      pymdown-extensions \
+                      mkdocs-minify-plugin
+
+      - name: Deploy to GitHub Pages
+        run: mkdocs gh-deploy --force
