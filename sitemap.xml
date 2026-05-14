@@ -2,134 +2,134 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://anevisser.github.io/qed-framework/index.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/ai/architecture.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/ai/ollama.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/ai/overview.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/ci-cd/runner-setup.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/ci-cd/wiring-tests.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/community/acknowledgements.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/community/how-to-contribute.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/community/roadmap.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/dsl/core-constructs.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/dsl/idiomatic-patterns.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/dsl/jsonutils.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/dsl/overview.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/getting-started/customtestsuites.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/getting-started/installation.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/getting-started/prerequisites.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/page-objects/screen-area-composition.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/philosophy/bdd.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/philosophy/design-principles.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/philosophy/origin-story.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/reporting/extent-reports.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/reporting/test-tags.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/rest/dsl-for-apis.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/rest/ktor_sharing.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/rest/performance.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/rest/setup-mailpit.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/rest/setup.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/rest/tdd-workflow.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/rest/testing-emails.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/sut/sut-profiles.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/tutorials/common-pitfalls.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/tutorials/real-world-scenarios.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
     <url>
          <loc>https://anevisser.github.io/qed-framework/tutorials/step-by-step.html</loc>
-         <lastmod>2026-05-09</lastmod>
+         <lastmod>2026-05-14</lastmod>
     </url>
 </urlset>
