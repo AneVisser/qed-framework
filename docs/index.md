@@ -4,7 +4,7 @@
 
 # Modern DSL-driven testing. Minimalist, maintainable, and made for scale.
 
-**QED** is a modern test automation framework built for engineers who value clarity, speed, and trust. Written in Kotlin and powered by expressive DSLs, QED turns test automation into something more than scripts — it becomes a declarative, maintainable, and evidence-driven practice.
+[**QED**](https://github.com/AneVisser/qed-framework) is a modern test automation framework built for engineers who value clarity, speed, and trust. Written in Kotlin and powered by expressive DSLs, QED turns test automation into something more than scripts — it becomes a declarative, maintainable, and evidence-driven practice.
 
 The name comes from "Quod Erat Demonstrandum" — Latin for "that which was to be proven." Traditionally, it closes a mathematical proof: a statement that starts as a question, travels through reasoning, and ends as truth. In the same way, QED closes the loop on software quality, turning intent into evidence so you can release with confidence.
 
@@ -16,11 +16,11 @@ And just as in proofs, every outcome has its mark:
 
 ❌ Failed tests: *Investigandum est* — further investigation is required.
 
-With QED, every test tells a story, and every story ends with proof.
+With [QED](https://github.com/AneVisser/qed-framework), every test tells a story, and every story ends with proof.
 
 ---
 
-## What is QED?
+## What is [QED](https://github.com/AneVisser/qed-framework)?
 
 Apart from the Latin origin, QED stands for:
 
