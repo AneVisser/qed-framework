@@ -60,7 +60,7 @@ enum class APIChalURLPath(val path: String) {
 }
 ```
 
-For full type safety — including payload and response type checking — see [Sharing with Ktor](sharing-with-ktor.md).
+For full type safety — including payload and response type checking — see [Sharing with Ktor](ktor_sharing.md).
 
 ---
 
@@ -197,7 +197,7 @@ for untyped requests or responses. Use `Single` for objects and `ListOf` for arr
 Route paths are plain strings, with placeholders for parameters in curly brackets. QED supports
 embedded parameters, for example `/api/calculate/{farmId}/pasture`.
 
-See also [Sharing with Ktor](ktor-sharing.md).
+See also [Sharing with Ktor](ktor_sharing.md).
 
 ---
 
