@@ -23,5 +23,9 @@ open class AtomicWidget(val context : TestContext, val selector : String, val vi
 
     override val isVisible : Boolean
         get() = pageElement.isVisible()
+
+    override val exists : Boolean
+        get() = pageElement.count() > 0
+
 }
 

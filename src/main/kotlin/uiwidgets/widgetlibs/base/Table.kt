@@ -41,7 +41,7 @@ class Table(context : TestContext, selector : String, val headerRowCount : Int =
         }
     }
 
-    override fun row(rowIndex: Int) =  pageElement.locator("tr").nth(rowIndex + headerRowCount)
+    override fun row(rowIndex: Int) = pageElement.locator("tr").nth(rowIndex + headerRowCount)
 
     override fun rowValues(rowIndex: Int) : List<String> {
         val returnVal = mutableListOf<String>()
