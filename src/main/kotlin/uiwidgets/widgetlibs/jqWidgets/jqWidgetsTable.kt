@@ -101,4 +101,7 @@ class jqWidgetsTable(context : TestContext, selector : String, val headerRowCoun
         return cell(rowIndex, columnIndex)
     }
 
+    override fun locatorInRow(rowIndex: Int, selector: String): Locator =
+        row(rowIndex).locator(selector)
+
 }

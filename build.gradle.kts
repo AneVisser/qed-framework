@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version "2.0.20"
     `java-library`  // enables api vs implementation distinction
+    kotlin("plugin.allopen") version "2.0.20"
 }
 
 group = "com.qed"
@@ -12,6 +13,14 @@ repositories {
 
 kotlin {
     jvmToolchain(22)
+}
+
+allOpen {
+    annotation("org.testng.annotations.Test")
+    annotation("org.testng.annotations.BeforeClass")
+    annotation("org.testng.annotations.AfterClass")
+    annotation("org.testng.annotations.BeforeMethod")
+    annotation("org.testng.annotations.AfterMethod")
 }
 
 dependencies {
