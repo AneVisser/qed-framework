@@ -126,4 +126,7 @@ class Table(
     override operator fun get(rowIndex: Int, columnIndex: Int): Locator {
         return cell(rowIndex, columnIndex)
     }
+
+    override fun locatorInRow(rowIndex: Int, selector: String): Locator =
+        row(rowIndex).locator(selector)
 }

@@ -24,4 +24,6 @@ interface ITable {
 
     // to support the following syntax in validations: expect(table[1, 2].textContent()).to.equal("Price")
     operator fun get(rowIndex: Int, columnIndex: Int): Locator
+
+    fun locatorInRow(rowIndex: Int, selector: String): Locator
 }
