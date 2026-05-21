@@ -9,7 +9,7 @@ import kotlin.time.Duration.Companion.seconds
 
 class RetryUntil {
     internal var action: () -> Unit = {}
-    internal var evaluateCondition: () -> Boolean = {false}
+    internal var evaluateCondition: () -> Boolean = { false }
     internal var actOnConditionNotMet: (Exception) -> Unit = {}
 
     fun action(block: () -> Unit) { action = block }
@@ -17,7 +17,7 @@ class RetryUntil {
     fun onConditionNotMet(block: (Exception) -> Unit) { actOnConditionNotMet = block }
 }
 
-fun retryUntil(maxWaitTime: Duration = 30.seconds, pollInterval:Duration = 5.milliseconds, block: RetryUntil.() -> Unit) {
+fun retryUntil(maxWaitTime: Duration = 30.seconds, pollInterval: Duration = 5.milliseconds, block: RetryUntil.() -> Unit) {
     val runner = RetryUntil().apply(block)
     try {
         val actualPollInterval = minOf(pollInterval, maxWaitTime)
@@ -29,7 +29,14 @@ fun retryUntil(maxWaitTime: Duration = 30.seconds, pollInterval:Duration = 5.mil
         val maxEndTime = startTime.plusSeconds(maxWaitTime.inWholeSeconds)
         var conditionMet = false
         while (!conditionMet && LocalDateTime.now() < maxEndTime) {
-            runner.action()
+            try {
+                runner.action()
+            } catch (ex: Exception) {
+                // Action threw (e.g. Playwright timeout) — treat as retry signal
+                runner.actOnConditionNotMet(ex)
+                Thread.sleep(actualPollInterval.inWholeMilliseconds)
+                continue
+            }
             Thread.sleep(actualPollInterval.inWholeMilliseconds)
             conditionMet = runner.evaluateCondition()
         }
