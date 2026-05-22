@@ -24,8 +24,7 @@ open class HasBrowser(val baseTest : BaseTest, var urlKey : String) : IHasBrowse
     override val browser : BrowserDriver
         get() = browserDriver.get()
     open lateinit var widgetType : WidgetType
-    lateinit var browserName : BrowserName
-
+    var browserName: BrowserName = BrowserName.CHROMIUM
 
     // this function needs to be overridden in the TestBaseClass for the specific application
     // to verify that you have loaded the following page.

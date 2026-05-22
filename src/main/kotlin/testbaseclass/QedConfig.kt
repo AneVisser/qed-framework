@@ -3,7 +3,8 @@ data class QedConfig(
     val widgettype: String? = null,
     val browser: String? = null,
     val reporting: ReportingConfig? = null,
-    val testrunmetadata : TestRunMetaData? = null
+    val testrunmetadata : TestRunMetaData? = null,
+    val mailpitUrl: String? = null
 )
 
 data class ReportingConfig(

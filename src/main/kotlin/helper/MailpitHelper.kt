@@ -6,31 +6,23 @@ import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import org.json.JSONObject
 import org.json.JSONArray
-import qed.testbaseclass.QedFrameworkSettings
 
 /**
  * Helper for querying and managing the Mailpit email capture server.
- * Mailpit runs on vm-mailpit and captures all outbound emails from
- * staging, preprod, and local dev (when using application-local-test.conf).
- *
- * API base: http://192.168.56.13:8025
+ * Mailpit captures all outbound emails from staging, preprod, and local dev.
+ * Instantiated by TestContext after config is loaded.
  */
-object MailpitHelper {
-
-//    private const val MAILPIT_BASE_URL = "http://192.168.56.13:8025"
-    private val MAILPIT_BASE_URL: String
-        get() = QedFrameworkSettings.mailpitBaseUrl
+class MailpitHelper(private val mailpitBaseUrl: String) {
 
     private val client = HttpClient.newHttpClient()
 
     /**
      * Delete all captured messages.
-     * Call in @BeforeMethod for any test that sends email, to prevent
-     * messages from a previous run interfering.
+     * Called in @BeforeSuite to prevent stale emails from prior runs interfering.
      */
     fun clearInbox() {
         val request = HttpRequest.newBuilder()
-            .uri(URI.create("$MAILPIT_BASE_URL/api/v1/messages"))
+            .uri(URI.create("$mailpitBaseUrl/api/v1/messages"))
             .DELETE()
             .build()
         client.send(request, HttpResponse.BodyHandlers.ofString())
@@ -39,13 +31,8 @@ object MailpitHelper {
     /**
      * Wait for an email matching the given recipient and subject to arrive.
      * Polls every 500ms until the message appears or the timeout is reached.
-     * Retrieves the full message body and deletes it by ID after retrieval
+     * Retrieves the full message body and deletes it after retrieval
      * so concurrent test runs are not affected.
-     *
-     * @param toAddress  exact recipient email address to match
-     * @param subjectContains  substring to match in the subject line
-     * @param timeoutMs  how long to wait before failing (default 10 seconds)
-     * @return the full message as a JSONObject (has "Text" and "HTML" fields)
      */
     fun waitForEmail(
         toAddress: String,
@@ -55,7 +42,7 @@ object MailpitHelper {
         val deadline = System.currentTimeMillis() + timeoutMs
         while (System.currentTimeMillis() < deadline) {
             val listRequest = HttpRequest.newBuilder()
-                .uri(URI.create("$MAILPIT_BASE_URL/api/v1/messages"))
+                .uri(URI.create("$mailpitBaseUrl/api/v1/messages"))
                 .GET()
                 .build()
             val listResponse = client.send(listRequest, HttpResponse.BodyHandlers.ofString())
@@ -71,9 +58,7 @@ object MailpitHelper {
                 }
                 if (matchesRecipient && subject.contains(subjectContains)) {
                     val id = msg.getString("ID")
-                    // Retrieve full message (contains Text and HTML body)
                     val fullMessage = getMessageById(id)
-                    // Delete by ID — don't bulk clear in case other tests have messages
                     deleteMessageById(id)
                     return fullMessage
                 }
@@ -87,8 +72,20 @@ object MailpitHelper {
     }
 
     /**
-     * Extract the first URL from a plain-text email body that contains the given path fragment.
-     * Example: extractLink(email.get("Text").toString(), "/verify-email?token=")
+     * Convenience method: wait for an email and extract a link containing the given path fragment.
+     */
+    fun getConfirmationLink(
+        toAddress: String,
+        subjectContains: String,
+        pathFragment: String,
+        timeoutMs: Int = 10000
+    ): String {
+        val email = waitForEmail(toAddress, subjectContains, timeoutMs)
+        return extractLink(email.getString("Text"), pathFragment)
+    }
+
+    /**
+     * Extract the first URL from a plain-text email body containing the given path fragment.
      */
     fun extractLink(emailText: String, pathFragment: String): String {
         return emailText.lines()
@@ -101,7 +98,7 @@ object MailpitHelper {
 
     private fun getMessageById(id: String): JSONObject {
         val request = HttpRequest.newBuilder()
-            .uri(URI.create("$MAILPIT_BASE_URL/api/v1/message/$id"))
+            .uri(URI.create("$mailpitBaseUrl/api/v1/message/$id"))
             .GET()
             .build()
         val response = client.send(request, HttpResponse.BodyHandlers.ofString())
@@ -110,7 +107,7 @@ object MailpitHelper {
 
     private fun deleteMessageById(id: String) {
         val request = HttpRequest.newBuilder()
-            .uri(URI.create("$MAILPIT_BASE_URL/api/v1/message/$id"))
+            .uri(URI.create("$mailpitBaseUrl/api/v1/message/$id"))
             .DELETE()
             .build()
         client.send(request, HttpResponse.BodyHandlers.ofString())
