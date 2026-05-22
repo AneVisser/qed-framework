@@ -83,6 +83,9 @@ open class TestContext(
         mailpitHelper = config.mailpitUrl?.let { MailpitHelper(it) }
     }
 
+    /** Public entry point for suites that need to load config outside of beforeMethod, e.g. in @AfterSuite hooks. */
+    fun getConfig(configfile: String) = loadConfig(configfile)
+
     @BeforeSuite
     fun beforeSuite() {
         // intentionally empty — kept for future suite-level setup
