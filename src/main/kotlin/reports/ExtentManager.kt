@@ -136,11 +136,11 @@ object ExtentManager {
         """.trimIndent()
     lateinit var htmlReporter: ExtentSparkReporter
     lateinit var extent: ExtentReports
-    lateinit var rptTheme : Theme
-    lateinit var reportname : String
-    lateinit var documenttitle : String;
+    var rptTheme: Theme = Theme.STANDARD
+    var reportname: String = "Test Execution Report"
+    var documenttitle: String = "Test Automation Report"
     var enableScreenshots : Boolean = true
-    lateinit var fontcolour : String
+    var fontcolour: String = "#214478"
 
     private val ext_reports: ExtentReports by lazy { createInstance() }
 
