@@ -1,7 +1,0 @@
-{
-  "environments": {
-    "dev":    { "mailpitBaseUrl": "http://192.168.50.104:8025" },
-    "stag":   { "mailpitBaseUrl": "http://192.168.50.104:8025" },
-    "preprod":{ "mailpitBaseUrl": "http://192.168.50.104:8025" }
-  }
-}
