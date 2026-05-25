@@ -7,6 +7,7 @@ import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
 import io.restassured.response.Response
+import kotlinx.coroutines.future.await
 import org.hamcrest.Matchers.anyOf
 import org.hamcrest.Matchers.equalTo
 import qed.json.QEDJson
@@ -49,11 +50,85 @@ enum class ExtractStrategy(
     })
 }
 
-
 class RestClient(var url : String, val logger : Logger, val baseTest: BaseTest) : IREST {
+
+    companion object {
+        // Single shared HttpClient across all threads — java.net.http.HttpClient is
+        // designed for concurrent reuse. sendAsync().await() suspends the coroutine
+        // rather than blocking the thread, allowing genuine concurrent requests.
+        val sharedHttpClient: HttpClient = HttpClient.newBuilder()
+            .connectTimeout(Duration.ofSeconds(10))
+            .build()
+    }
+
     // add a parameter that is part of a path, so single parameter delimited by slash
     override fun addPathParameters(parameters: List<String>): String {
         return parameters.joinToString("/") { URLEncoder.encode(it, "UTF-8") }
+    }
+
+    /**
+     * Concurrent-safe alternative to send() for use in performance/load tests.
+     * Uses java.net.http.HttpClient (shared, thread-safe) instead of RestAssured's
+     * Groovy DSL, which has internal synchronization that serialises concurrent callers.
+     * Supports trackPerformance via the same PerformanceTracker used by sendUntyped.
+     */
+    suspend inline fun <reified T : Any> sendConcurrent(
+        urlPath: IURLPath,
+        body: Any? = null,
+        pathParams: Map<String, Any>? = null,
+        headerLst: List<Pair<String, String>>? = null,
+        trackPerformance: Boolean = false
+    ): T {
+        val fullPath = if (!pathParams.isNullOrEmpty()) {
+            urlPath.buildRoute(pathParams)
+        } else {
+            urlPath.route
+        }
+        // ensure exactly one slash between base url and path regardless of whether
+        // url has a trailing slash or route has a leading slash
+        val fullUrl = url.trimEnd('/') + "/" + fullPath.trimStart('/')
+
+        val requestBuilder = HttpRequest.newBuilder()
+            .uri(URI.create(fullUrl))
+            .timeout(Duration.ofSeconds(30))
+            .header("Content-Type", "application/json")
+
+        // apply any extra headers (e.g. Authorization: Bearer token)
+        headerLst?.forEach { (key, value) -> requestBuilder.header(key, value) }
+
+        when (urlPath.method) {
+            RequestType.POST -> requestBuilder.POST(
+                HttpRequest.BodyPublishers.ofString(if (body != null) QEDJson.toJson(body) else "{}")
+            )
+            RequestType.GET  -> requestBuilder.GET()
+            RequestType.PUT  -> requestBuilder.PUT(
+                HttpRequest.BodyPublishers.ofString(if (body != null) QEDJson.toJson(body) else "{}")
+            )
+            RequestType.DELETE -> requestBuilder.DELETE()
+            else -> throw Exception("Method ${urlPath.method} not supported in sendConcurrent")
+        }
+
+        val request = requestBuilder.build()
+
+        val responseBody = if (trackPerformance) {
+            trackPerf(baseTest.uniqueClassName, baseTest.methodName, urlPath.method, urlPath) {
+                sharedHttpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString()).await().body()
+            }
+        } else {
+            sharedHttpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString()).await().body()
+        }
+
+        // reuse the same deserialization logic as send()
+        return when (val kind = urlPath.responseKind) {
+            is PayloadKind.Single -> QEDJson.decodeSafely(kind.type as KClass<T>, responseBody)
+            is PayloadKind.ListOf -> QEDJson.decodeSafelyList(kind.type, responseBody) as T
+            is PayloadKind.ParameterizedOf -> {
+                val type = Types.newParameterizedType(kind.outerType, kind.innerType)
+                val adapter = QEDJson.moshi.adapter<T>(type)
+                adapter.fromJson(responseBody) ?: throw IllegalStateException("Deserialization returned null for ${urlPath.route}")
+            }
+            else -> QEDJson.decodeSafely(T::class, responseBody)
+        }
     }
 
     /**
@@ -64,8 +139,7 @@ class RestClient(var url : String, val logger : Logger, val baseTest: BaseTest) 
         urlPath: IURLPath,
         body: Any?,
         statusCodeLst: List<Int>,
-        pathParams: Map<String, Any>?,  // NEW
-//        pathParameters: List<String>?,
+        pathParams: Map<String, Any>?,
         parameterPairs: List<URLParameter>?,
         contentType: ContentType,
         headerLst : List<Pair<String, String>>?,
@@ -160,8 +234,7 @@ class RestClient(var url : String, val logger : Logger, val baseTest: BaseTest) 
         urlPath: IURLPath,
         body: Any? = null,
         statusCodeLst: List<Int> = listOf(200, 201),
-        pathParams: Map<String, Any>? = null,  // NEW: replaces pathParameters list
-//        pathParameters: List<String>? = null, // Keep for backward compatibility
+        pathParams: Map<String, Any>? = null,
         parameterPairs: List<URLParameter>? = null,
         contentType: ContentType = ContentType.JSON,
         headerLst : List<Pair<String, String>>? = null,
@@ -173,7 +246,6 @@ class RestClient(var url : String, val logger : Logger, val baseTest: BaseTest) 
             body = body,
             statusCodeLst = statusCodeLst,
             pathParams = pathParams,
-//            pathParameters = pathParameters,
             parameterPairs = parameterPairs,
             contentType = contentType,
             extractStrategy = extractStrategy,

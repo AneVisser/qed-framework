@@ -20,13 +20,5 @@ interface IREST {
 
 }
 
-//enum class RequestType {
-//    GET,
-//    POST,
-//    PUT,
-//    DELETE,
-//    PATCH
-//}
-
 data class URLParameter (val name : String, val value : String)
 
