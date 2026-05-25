@@ -69,6 +69,7 @@ dependencies {
     // ── Coroutines ───────────────────────────────────────────────────
     // api: SUT tests may use coroutines for concurrent/performance tests
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.10.1")
 
     // ── HTML generation (used in reports) ────────────────────────────
     // candidate to tighten to implementation if only used inside framework reports
