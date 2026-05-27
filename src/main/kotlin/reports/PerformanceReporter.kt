@@ -333,6 +333,13 @@ object PerformanceReporter {
         val configmetadata = TestRunContext.testrunmetadata
         val rootDir = File("perf-history", configmetadata?.sut!!)         // platform-safe
         val snapshotList = loadAllSnapshots(rootDir)
+
+        // No history yet (e.g. first run) — nothing to trend, skip silently
+        if (snapshotList.isEmpty()) {
+            historyTest.log(Status.INFO, "No historical performance data yet — trends will appear after the first run completes.")
+            return
+        }
+
         val stats = aggregateStats(snapshotList)
         renderMarkdownChart(stats)
 
