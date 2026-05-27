@@ -239,11 +239,11 @@ object PerformanceReporter {
         val jsonList = toJsonSnapshot(envinfo, recList)
 
         val runId = "rpt_$runDateTime.json"
-        val rootDir = "perf-history\\${configmetadata.sut}"
-        val file = File("$rootDir\\${commit.commit}\\$runId")
-        file.parentFile.mkdirs()                // creates all missing parent directories
+        val rootDir = File("perf-history", configmetadata.sut)                      // platform-safe
+        val file = File(File(rootDir, commit.commit), runId)         // platform-safe
+        file.parentFile.mkdirs()
         file.writeText(jsonList)
-        enforceRetentionPolicy(File(rootDir), configmetadata.maxRunsPerCommit!!, configmetadata.maxCommitsToKeep!!)
+        enforceRetentionPolicy(rootDir, configmetadata.maxRunsPerCommit!!, configmetadata.maxCommitsToKeep!!)
     }
 
     private fun enforceRetentionPolicy(root: File, maxCommits: Int, maxRunsPerCommit: Int) {
@@ -331,8 +331,8 @@ object PerformanceReporter {
 
     fun reportTrends() {
         val configmetadata = TestRunContext.testrunmetadata
-        val rootDir = "perf-history\\${configmetadata?.sut}"
-        val snapshotList = loadAllSnapshots(File(rootDir))
+        val rootDir = File("perf-history", configmetadata?.sut!!)         // platform-safe
+        val snapshotList = loadAllSnapshots(rootDir)
         val stats = aggregateStats(snapshotList)
         renderMarkdownChart(stats)
 
