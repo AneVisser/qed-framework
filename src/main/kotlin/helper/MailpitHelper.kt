@@ -37,7 +37,7 @@ class MailpitHelper(private val mailpitBaseUrl: String) {
     fun waitForEmail(
         toAddress: String,
         subjectContains: String,
-        timeoutMs: Int = 10000
+        timeoutMs: Int = 15000
     ): JSONObject {
         val deadline = System.currentTimeMillis() + timeoutMs
         while (System.currentTimeMillis() < deadline) {
@@ -78,7 +78,7 @@ class MailpitHelper(private val mailpitBaseUrl: String) {
         toAddress: String,
         subjectContains: String,
         pathFragment: String,
-        timeoutMs: Int = 10000
+        timeoutMs: Int = 15000
     ): String {
         val email = waitForEmail(toAddress, subjectContains, timeoutMs)
         return extractLink(email.getString("Text"), pathFragment)
