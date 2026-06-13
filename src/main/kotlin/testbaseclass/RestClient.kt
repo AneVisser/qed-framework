@@ -184,7 +184,7 @@ class RestClient(var url : String, val logger : Logger, val baseTest: BaseTest) 
         fun executeSend() =
             Given {
                 contentType("application/json")
-                if (method in arrayOf(RequestType.POST) && body != null) {
+                if (method in arrayOf(RequestType.POST, RequestType.PATCH, RequestType.PUT) && body != null) {
                     when (body) {
                         is String -> body(body)
                         else -> body(QEDJson.toJson(body))
