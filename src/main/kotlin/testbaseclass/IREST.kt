@@ -14,7 +14,8 @@ interface IREST {
                     contentType : ContentType = ContentType.JSON,
                     headerLst : List<Pair<String, String>>? = null,
                     extractStrategy : ExtractStrategy  = ExtractStrategy.DEFAULT,
-                    trackPerformance : Boolean = false) : Any?
+                    trackPerformance : Boolean = false,
+                    followRedirects: Boolean = true) : Any?
 
     fun jsonVerify(expValue: String, testValue : String)
 
