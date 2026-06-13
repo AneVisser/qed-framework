@@ -32,10 +32,14 @@ enum class ExtractStrategy(
     val extractor: (Response) -> Any?
 ) {
     DEFAULT({ response ->
-        // Default JSON parsing
-        val json = response.body().asString()
-        val cleanJson = json.replace(Regex("""(\r\n)|\n"""), "")
-        QEDJson.mapFromJson(cleanJson)!!
+        val body = response.body().asString()
+        // Return empty map if body is not JSON (e.g. redirect to HTML page)
+        if (body.isBlank() || !body.trimStart().startsWith("{") && !body.trimStart().startsWith("[")) {
+            emptyMap<String, Any>()
+        } else {
+            val cleanJson = body.replace(Regex("""(\r\n)|\n"""), "")
+            QEDJson.mapFromJson(cleanJson)!!
+        }
     }),
     OLLAMA_STREAM({ response ->
         // Ollama streaming JSON parser
@@ -144,7 +148,8 @@ class RestClient(var url : String, val logger : Logger, val baseTest: BaseTest) 
         contentType: ContentType,
         headerLst : List<Pair<String, String>>?,
         extractStrategy: ExtractStrategy,
-        trackPerformance: Boolean
+        trackPerformance: Boolean,
+        followRedirects: Boolean
     ): Any {
         // Build the full path
         val fullPath = if (pathParams != null && pathParams.isNotEmpty()) {
@@ -184,6 +189,10 @@ class RestClient(var url : String, val logger : Logger, val baseTest: BaseTest) 
         fun executeSend() =
             Given {
                 contentType("application/json")
+                // Disable redirect following if caller expects a 3xx response
+                if (!followRedirects) {
+                    redirects().follow(false)
+                }
                 if (method in arrayOf(RequestType.POST, RequestType.PATCH, RequestType.PUT) && body != null) {
                     when (body) {
                         is String -> body(body)
