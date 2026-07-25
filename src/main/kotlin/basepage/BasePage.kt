@@ -58,4 +58,7 @@ open class BasePage(val context : TestContext) : IBaseTest by context{
         logger.outdent()
     }
 
+    fun goBack() = context.browser.page.goBack()
+    fun goForward() = context.browser.page.goForward()
+
 }
