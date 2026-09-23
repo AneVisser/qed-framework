@@ -24,7 +24,18 @@ class Table(
     internal fun waitForStableRows() {
         val pollIntervalMs = 50L
         val deadline = System.currentTimeMillis() + stabilityTimeoutMs
-        var stableCount = pageElement.locator("tr").count()
+
+        // Query the raw locator directly rather than going through pageElement's
+        // getter — pageElement itself retry-waits up to 5s for the selector to
+        // match something, which is wrong here: if the table element is removed
+        // from the DOM entirely (e.g. an SPA swaps it for an empty-state message
+        // when the underlying list becomes empty), that's a valid "0 rows" result,
+        // not something to block on. Routing through pageElement on every 50ms
+        // poll tick could silently eat seconds of the stability budget on a single
+        // tick, producing spurious "did not reach a stable row count" failures.
+        fun currentRowCount() = context.browser.page.locator(selector).locator("tr").count()
+
+        var stableCount = currentRowCount()
         var stableSince = System.currentTimeMillis()
 
         while (true) {
@@ -34,7 +45,7 @@ class Table(
 
             Thread.sleep(pollIntervalMs)
 
-            val currentCount = pageElement.locator("tr").count()
+            val currentCount = currentRowCount()
             if (currentCount != stableCount) {
                 // Row count changed — reset the stability clock
                 stableCount = currentCount
