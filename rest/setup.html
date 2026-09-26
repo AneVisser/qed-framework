@@ -1330,22 +1330,22 @@ endpoint definitions, and idiomatic wiring.</p>
 <li>A REST wrapper (<code>HasRest</code>) that injects endpoint configuration</li>
 </ul>
 <div class="language-kotlin highlight"><pre><span></span><code><span id="__span-0-1"><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">baseTest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BaseTest</span><span class="p">()</span>
-</span><span id="__span-0-2"><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">hasRest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HasRest</span><span class="p">(</span><span class="n">baseTest</span><span class="p">,</span><span class="w"> </span><span class="n">urlKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;url&quot;</span><span class="p">)</span>
+</span><span id="__span-0-2"><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">hasRest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HasRest</span><span class="p">(</span><span class="n">baseTest</span><span class="p">,</span><span class="w"> </span><span class="n">urlKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"url"</span><span class="p">)</span>
 </span></code></pre></div>
 <hr />
 <h2 id="environment-configuration">Environment Configuration<a class="headerlink" href="#environment-configuration" title="Permanent link">&para;</a></h2>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><span class="nt">&quot;environments&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-1-2"><span class="w">  </span><span class="nt">&quot;dev&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-1-3"><span class="w">    </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://apichallenges.eviltester.com&quot;</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><span class="nt">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-2"><span class="w">  </span><span class="nt">"dev"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-3"><span class="w">    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://apichallenges.eviltester.com"</span>
 </span><span id="__span-1-4"><span class="w">  </span><span class="p">},</span>
-</span><span id="__span-1-5"><span class="w">  </span><span class="nt">&quot;test&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-1-6"><span class="w">    </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ENV_MYAPP&quot;</span>
+</span><span id="__span-1-5"><span class="w">  </span><span class="nt">"test"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-6"><span class="w">    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ENV_MYAPP"</span>
 </span><span id="__span-1-7"><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-1-8"><span class="p">}</span>
 </span></code></pre></div>
 <p><strong>Secure URLs</strong></p>
 <p>If your endpoint is sensitive or dynamic, use an environment variable reference:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ENV_MYAPP&quot;</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ENV_MYAPP"</span>
 </span></code></pre></div>
 <p>Then set the corresponding environment variable on the host:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><span class="nv">MYAPP</span><span class="o">=</span>http://localhost/myapp
@@ -1354,8 +1354,8 @@ endpoint definitions, and idiomatic wiring.</p>
 <h2 id="endpoint-definitions">Endpoint Definitions<a class="headerlink" href="#endpoint-definitions" title="Permanent link">&para;</a></h2>
 <p>QED requires idiomatic endpoint declarations using enums or sealed classes:</p>
 <div class="language-kotlin highlight"><pre><span></span><code><span id="__span-4-1"><span class="kd">enum</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">APIChalURLPath</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">path</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-2"><span class="w">    </span><span class="n">SIM_ENTITIES</span><span class="p">(</span><span class="s">&quot;/sim/entities&quot;</span><span class="p">),</span>
-</span><span id="__span-4-3"><span class="w">    </span><span class="n">TODO_LIST</span><span class="p">(</span><span class="s">&quot;/todos&quot;</span><span class="p">)</span>
+</span><span id="__span-4-2"><span class="w">    </span><span class="n">SIM_ENTITIES</span><span class="p">(</span><span class="s">"/sim/entities"</span><span class="p">),</span>
+</span><span id="__span-4-3"><span class="w">    </span><span class="n">TODO_LIST</span><span class="p">(</span><span class="s">"/todos"</span><span class="p">)</span>
 </span><span id="__span-4-4"><span class="p">}</span>
 </span></code></pre></div>
 <p>For full type safety — including payload and response type checking — see <a href="ktor_sharing.html">Sharing with Ktor</a>.</p>
@@ -1371,11 +1371,11 @@ By default, this directory is called <code>QED-Shared</code>.</p>
 </span><span id="__span-5-3">├── QED-Shared      # Shared interfaces and URL definitions
 </span></code></pre></div>
 <p><strong><code>QED-Shared/settings.gradle.kts</code>:</strong></p>
-<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-6-1"><span class="n">rootProject</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;QED-Shared&quot;</span>
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-6-1"><span class="n">rootProject</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"QED-Shared"</span>
 </span></code></pre></div>
 <p><strong><code>QED-Shared/build.gradle.kts</code>:</strong></p>
 <div class="language-kotlin highlight"><pre><span></span><code><span id="__span-7-1"><span class="n">plugins</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-7-2"><span class="w">    </span><span class="n">kotlin</span><span class="p">(</span><span class="s">&quot;jvm&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="s">&quot;2.0.20&quot;</span>
+</span><span id="__span-7-2"><span class="w">    </span><span class="n">kotlin</span><span class="p">(</span><span class="s">"jvm"</span><span class="p">)</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="s">"2.0.20"</span>
 </span><span id="__span-7-3"><span class="p">}</span>
 </span><span id="__span-7-4">
 </span><span id="__span-7-5"><span class="n">repositories</span><span class="w"> </span><span class="p">{</span>
@@ -1383,11 +1383,11 @@ By default, this directory is called <code>QED-Shared</code>.</p>
 </span><span id="__span-7-7"><span class="p">}</span>
 </span><span id="__span-7-8">
 </span><span id="__span-7-9"><span class="n">dependencies</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-7-10"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="n">kotlin</span><span class="p">(</span><span class="s">&quot;stdlib&quot;</span><span class="p">))</span>
+</span><span id="__span-7-10"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="n">kotlin</span><span class="p">(</span><span class="s">"stdlib"</span><span class="p">))</span>
 </span><span id="__span-7-11"><span class="p">}</span>
 </span><span id="__span-7-12">
-</span><span id="__span-7-13"><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.example&quot;</span>
-</span><span id="__span-7-14"><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1.0.0&quot;</span>
+</span><span id="__span-7-13"><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"com.example"</span>
+</span><span id="__span-7-14"><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"1.0.0"</span>
 </span></code></pre></div>
 <p><strong><code>QED-Shared/src/main/kotlin/IURLPath.kt</code>:</strong></p>
 <div class="language-kotlin highlight"><pre><span></span><code><span id="__span-8-1"><span class="k">package</span><span class="w"> </span><span class="nn">qed.testbaseclass</span>
@@ -1415,13 +1415,13 @@ By default, this directory is called <code>QED-Shared</code>.</p>
 </span><span id="__span-8-23"><span class="p">}</span>
 </span></code></pre></div>
 <p><strong><code>QED/settings.gradle.kts</code></strong> — include the shared build:</p>
-<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-9-1"><span class="n">rootProject</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;QED&quot;</span>
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-9-1"><span class="n">rootProject</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"QED"</span>
 </span><span id="__span-9-2">
-</span><span id="__span-9-3"><span class="n">includeBuild</span><span class="p">(</span><span class="s">&quot;../QED-Shared&quot;</span><span class="p">)</span>
+</span><span id="__span-9-3"><span class="n">includeBuild</span><span class="p">(</span><span class="s">"../QED-Shared"</span><span class="p">)</span>
 </span></code></pre></div>
 <p><strong><code>QED/build.gradle.kts</code></strong> — declare the dependency:</p>
 <div class="language-kotlin highlight"><pre><span></span><code><span id="__span-10-1"><span class="n">plugins</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-10-2"><span class="w">    </span><span class="n">kotlin</span><span class="p">(</span><span class="s">&quot;jvm&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="s">&quot;2.0.20&quot;</span>
+</span><span id="__span-10-2"><span class="w">    </span><span class="n">kotlin</span><span class="p">(</span><span class="s">"jvm"</span><span class="p">)</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="s">"2.0.20"</span>
 </span><span id="__span-10-3"><span class="p">}</span>
 </span><span id="__span-10-4">
 </span><span id="__span-10-5"><span class="n">repositories</span><span class="w"> </span><span class="p">{</span>
@@ -1429,8 +1429,8 @@ By default, this directory is called <code>QED-Shared</code>.</p>
 </span><span id="__span-10-7"><span class="p">}</span>
 </span><span id="__span-10-8">
 </span><span id="__span-10-9"><span class="n">dependencies</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-10-10"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="n">kotlin</span><span class="p">(</span><span class="s">&quot;stdlib&quot;</span><span class="p">))</span>
-</span><span id="__span-10-11"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;com.example:qed-shared:1.0.0&quot;</span><span class="p">)</span>
+</span><span id="__span-10-10"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="n">kotlin</span><span class="p">(</span><span class="s">"stdlib"</span><span class="p">))</span>
+</span><span id="__span-10-11"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">"com.example:qed-shared:1.0.0"</span><span class="p">)</span>
 </span><span id="__span-10-12"><span class="p">}</span>
 </span></code></pre></div>
 <hr />
@@ -1447,13 +1447,13 @@ a <code>sut</code> subdirectory inside <code>QED-Shared</code>, with a subdirect
 <div class="language-kotlin highlight"><pre><span></span><code><span id="__span-12-1"><span class="kd">enum</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">APIChalURLPath</span><span class="p">(</span>
 </span><span id="__span-12-2"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">path</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
 </span><span id="__span-12-3"><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">method</span><span class="p">:</span><span class="w"> </span><span class="n">RequestType</span><span class="p">,</span>
-</span><span id="__span-12-4"><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">responseKind</span><span class="p">:</span><span class="w"> </span><span class="n">PayloadKind?,</span>
-</span><span id="__span-12-5"><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">payloadKind</span><span class="p">:</span><span class="w"> </span><span class="n">PayloadKind?,</span>
+</span><span id="__span-12-4"><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">responseKind</span><span class="p">:</span><span class="w"> </span><span class="n">PayloadKind?</span><span class="p">,</span>
+</span><span id="__span-12-5"><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">payloadKind</span><span class="p">:</span><span class="w"> </span><span class="n">PayloadKind?</span><span class="p">,</span>
 </span><span id="__span-12-6"><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IURLPath</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-12-7"><span class="w">    </span><span class="n">POST_SIM_ENTITIES</span><span class="p">(</span><span class="s">&quot;/sim/entities&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">RequestType</span><span class="p">.</span><span class="na">POST</span><span class="p">,</span><span class="w"> </span><span class="n">Single</span><span class="p">(</span><span class="n">Resp_SimEntities</span><span class="o">::</span><span class="n">class</span><span class="p">),</span><span class="w"> </span><span class="n">Single</span><span class="p">(</span><span class="n">SimEntities</span><span class="o">::</span><span class="n">class</span><span class="p">)),</span>
-</span><span id="__span-12-8"><span class="w">    </span><span class="n">GET_SIM_ENTITIES</span><span class="p">(</span><span class="s">&quot;/sim/entities/{entity}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">RequestType</span><span class="p">.</span><span class="na">GET</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">),</span>
-</span><span id="__span-12-9"><span class="w">    </span><span class="n">PUT_SIM_ENTITIES</span><span class="p">(</span><span class="s">&quot;/sim/entities/{entity}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">RequestType</span><span class="p">.</span><span class="na">PUT</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="n">Single</span><span class="p">(</span><span class="n">SimEntities</span><span class="o">::</span><span class="n">class</span><span class="p">)),</span>
-</span><span id="__span-12-10"><span class="w">    </span><span class="n">TODOS</span><span class="p">(</span><span class="s">&quot;/todos&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">RequestType</span><span class="p">.</span><span class="na">GET</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+</span><span id="__span-12-7"><span class="w">    </span><span class="n">POST_SIM_ENTITIES</span><span class="p">(</span><span class="s">"/sim/entities"</span><span class="p">,</span><span class="w"> </span><span class="n">RequestType</span><span class="p">.</span><span class="na">POST</span><span class="p">,</span><span class="w"> </span><span class="n">Single</span><span class="p">(</span><span class="n">Resp_SimEntities</span><span class="o">::</span><span class="n">class</span><span class="p">),</span><span class="w"> </span><span class="n">Single</span><span class="p">(</span><span class="n">SimEntities</span><span class="o">::</span><span class="n">class</span><span class="p">)),</span>
+</span><span id="__span-12-8"><span class="w">    </span><span class="n">GET_SIM_ENTITIES</span><span class="p">(</span><span class="s">"/sim/entities/{entity}"</span><span class="p">,</span><span class="w"> </span><span class="n">RequestType</span><span class="p">.</span><span class="na">GET</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">),</span>
+</span><span id="__span-12-9"><span class="w">    </span><span class="n">PUT_SIM_ENTITIES</span><span class="p">(</span><span class="s">"/sim/entities/{entity}"</span><span class="p">,</span><span class="w"> </span><span class="n">RequestType</span><span class="p">.</span><span class="na">PUT</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="n">Single</span><span class="p">(</span><span class="n">SimEntities</span><span class="o">::</span><span class="n">class</span><span class="p">)),</span>
+</span><span id="__span-12-10"><span class="w">    </span><span class="n">TODOS</span><span class="p">(</span><span class="s">"/todos"</span><span class="p">,</span><span class="w"> </span><span class="n">RequestType</span><span class="p">.</span><span class="na">GET</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
 </span><span id="__span-12-11">
 </span><span id="__span-12-12"><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">route</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
 </span><span id="__span-12-13"><span class="w">        </span><span class="k">get</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">path</span>

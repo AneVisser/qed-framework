@@ -993,7 +993,7 @@
 <li>Download the installer from <a href="https://ollama.com/download">https://ollama.com/download</a></li>
 <li>Open a terminal and navigate to the download directory</li>
 <li>Run the installer, optionally specifying a custom install directory:
-   <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1">OllamaSetup.exe /DIR=&quot;D:\Tools\Ollama&quot;
+   <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1">OllamaSetup.exe /DIR="D:\Tools\Ollama"
 </span></code></pre></div>
    If the directory parameter is omitted, Ollama installs to <code>C:\Users\&lt;username&gt;\.ollama</code></li>
 </ol>
@@ -1009,7 +1009,7 @@
 </ol>
 <p><strong>Option 2 — Directory junction (fallback):</strong></p>
 <p>If the environment variable approach does not take effect:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1">mklink /J &quot;C:\Users\&lt;username&gt;\.ollama\models&quot; &quot;D:\Ollama\Models&quot;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1">mklink /J "C:\Users\&lt;username&gt;\.ollama\models" "D:\Ollama\Models"
 </span></code></pre></div>
 <p>Then restart Ollama. It will transparently operate from the new location.</p>
 <hr />

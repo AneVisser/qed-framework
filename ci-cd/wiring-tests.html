@@ -1196,16 +1196,16 @@
 </span><span id="__span-0-4"><span class="w">  </span><span class="nt">workflow_call</span><span class="p">:</span>
 </span><span id="__span-0-5"><span class="w">    </span><span class="nt">inputs</span><span class="p">:</span>
 </span><span id="__span-0-6"><span class="w">      </span><span class="nt">environment</span><span class="p">:</span>
-</span><span id="__span-0-7"><span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;QED</span><span class="nv"> </span><span class="s">environment</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">(stag</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">preprod)&#39;</span>
+</span><span id="__span-0-7"><span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'QED</span><span class="nv"> </span><span class="s">environment</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">(stag</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">preprod)'</span>
 </span><span id="__span-0-8"><span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span><span id="__span-0-9"><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 </span><span id="__span-0-10">
 </span><span id="__span-0-11"><span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span>
 </span><span id="__span-0-12"><span class="w">    </span><span class="nt">inputs</span><span class="p">:</span>
 </span><span id="__span-0-13"><span class="w">      </span><span class="nt">environment</span><span class="p">:</span>
-</span><span id="__span-0-14"><span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Target</span><span class="nv"> </span><span class="s">environment&#39;</span>
+</span><span id="__span-0-14"><span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Target</span><span class="nv"> </span><span class="s">environment'</span>
 </span><span id="__span-0-15"><span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-0-16"><span class="w">        </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;stag&#39;</span>
+</span><span id="__span-0-16"><span class="w">        </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">'stag'</span>
 </span><span id="__span-0-17"><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">choice</span>
 </span><span id="__span-0-18"><span class="w">        </span><span class="nt">options</span><span class="p">:</span>
 </span><span id="__span-0-19"><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">stag</span>
@@ -1242,11 +1242,11 @@
 </span><span id="__span-0-50"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-java@v4</span>
 </span><span id="__span-0-51"><span class="w">        </span><span class="nt">with</span><span class="p">:</span>
 </span><span id="__span-0-52"><span class="w">          </span><span class="nt">distribution</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">temurin</span>
-</span><span id="__span-0-53"><span class="w">          </span><span class="nt">java-version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;22&#39;</span>
+</span><span id="__span-0-53"><span class="w">          </span><span class="nt">java-version</span><span class="p">:</span><span class="w"> </span><span class="s">'22'</span>
 </span><span id="__span-0-54">
 </span><span id="__span-0-55"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run API tests</span>
 </span><span id="__span-0-56"><span class="w">        </span><span class="nt">env</span><span class="p">:</span>
-</span><span id="__span-0-57"><span class="w">          </span><span class="nt">GRADLE_OPTS</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;-Xmx1024m</span><span class="nv"> </span><span class="s">-Dorg.gradle.daemon=false&quot;</span>
+</span><span id="__span-0-57"><span class="w">          </span><span class="nt">GRADLE_OPTS</span><span class="p">:</span><span class="w"> </span><span class="s">"-Xmx1024m</span><span class="nv"> </span><span class="s">-Dorg.gradle.daemon=false"</span>
 </span><span id="__span-0-58"><span class="w">          </span><span class="nt">QED_PASSWORD_ADMIN</span><span class="p">:</span><span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.QED_PASSWORD_ADMIN }}</span>
 </span><span id="__span-0-59"><span class="w">          </span><span class="nt">QED_PASSWORD_MANAGER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.QED_PASSWORD_MANAGER }}</span>
 </span><span id="__span-0-60"><span class="w">          </span><span class="nt">QED_PASSWORD_USER</span><span class="p">:</span><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.QED_PASSWORD_USER }}</span>
@@ -1273,16 +1273,16 @@
 </span><span id="__span-1-4"><span class="w">  </span><span class="nt">workflow_call</span><span class="p">:</span>
 </span><span id="__span-1-5"><span class="w">    </span><span class="nt">inputs</span><span class="p">:</span>
 </span><span id="__span-1-6"><span class="w">      </span><span class="nt">environment</span><span class="p">:</span>
-</span><span id="__span-1-7"><span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;QED</span><span class="nv"> </span><span class="s">environment</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">(stag</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">preprod)&#39;</span>
+</span><span id="__span-1-7"><span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'QED</span><span class="nv"> </span><span class="s">environment</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">(stag</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">preprod)'</span>
 </span><span id="__span-1-8"><span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span><span id="__span-1-9"><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 </span><span id="__span-1-10">
 </span><span id="__span-1-11"><span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span>
 </span><span id="__span-1-12"><span class="w">    </span><span class="nt">inputs</span><span class="p">:</span>
 </span><span id="__span-1-13"><span class="w">      </span><span class="nt">environment</span><span class="p">:</span>
-</span><span id="__span-1-14"><span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Target</span><span class="nv"> </span><span class="s">environment&#39;</span>
+</span><span id="__span-1-14"><span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Target</span><span class="nv"> </span><span class="s">environment'</span>
 </span><span id="__span-1-15"><span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-1-16"><span class="w">        </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;stag&#39;</span>
+</span><span id="__span-1-16"><span class="w">        </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">'stag'</span>
 </span><span id="__span-1-17"><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">choice</span>
 </span><span id="__span-1-18"><span class="w">        </span><span class="nt">options</span><span class="p">:</span>
 </span><span id="__span-1-19"><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">stag</span>
@@ -1329,12 +1329,12 @@
 </span><span id="__span-1-60"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-java@v4</span>
 </span><span id="__span-1-61"><span class="w">        </span><span class="nt">with</span><span class="p">:</span>
 </span><span id="__span-1-62"><span class="w">          </span><span class="nt">distribution</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">temurin</span>
-</span><span id="__span-1-63"><span class="w">          </span><span class="nt">java-version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;22&#39;</span>
+</span><span id="__span-1-63"><span class="w">          </span><span class="nt">java-version</span><span class="p">:</span><span class="w"> </span><span class="s">'22'</span>
 </span><span id="__span-1-64">
 </span><span id="__span-1-65"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run UI tests</span>
 </span><span id="__span-1-66"><span class="w">        </span><span class="nt">env</span><span class="p">:</span>
-</span><span id="__span-1-67"><span class="w">          </span><span class="nt">GRADLE_OPTS</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;-Xmx1024m</span><span class="nv"> </span><span class="s">-Dorg.gradle.daemon=false&quot;</span>
-</span><span id="__span-1-68"><span class="w">          </span><span class="nt">QED_HEADLESS</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</span><span id="__span-1-67"><span class="w">          </span><span class="nt">GRADLE_OPTS</span><span class="p">:</span><span class="w"> </span><span class="s">"-Xmx1024m</span><span class="nv"> </span><span class="s">-Dorg.gradle.daemon=false"</span>
+</span><span id="__span-1-68"><span class="w">          </span><span class="nt">QED_HEADLESS</span><span class="p">:</span><span class="w"> </span><span class="s">"true"</span>
 </span><span id="__span-1-69"><span class="w">          </span><span class="nt">QED_PASSWORD_ADMIN</span><span class="p">:</span><span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.QED_PASSWORD_ADMIN }}</span>
 </span><span id="__span-1-70"><span class="w">          </span><span class="nt">QED_PASSWORD_MANAGER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.QED_PASSWORD_MANAGER }}</span>
 </span><span id="__span-1-71"><span class="w">          </span><span class="nt">QED_PASSWORD_USER</span><span class="p">:</span><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.QED_PASSWORD_USER }}</span>

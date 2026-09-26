@@ -1238,7 +1238,7 @@
 <p>QED requires Java 22. Install Temurin via SDKMAN or directly:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1">sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>wget<span class="w"> </span>apt-transport-https
 </span><span id="__span-4-2">wget<span class="w"> </span>-qO<span class="w"> </span>-<span class="w"> </span>https://packages.adoptium.net/artifactory/api/gpg/key/public<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/trusted.gpg.d/adoptium.asc
-</span><span id="__span-4-3"><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;deb https://packages.adoptium.net/artifactory/deb </span><span class="k">$(</span>lsb_release<span class="w"> </span>-cs<span class="k">)</span><span class="s2"> main&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/adoptium.list
+</span><span id="__span-4-3"><span class="nb">echo</span><span class="w"> </span><span class="s2">"deb https://packages.adoptium.net/artifactory/deb </span><span class="k">$(</span>lsb_release<span class="w"> </span>-cs<span class="k">)</span><span class="s2"> main"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/adoptium.list
 </span><span id="__span-4-4">sudo<span class="w"> </span>apt<span class="w"> </span>update
 </span><span id="__span-4-5">sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>temurin-22-jdk
 </span><span id="__span-4-6">java<span class="w"> </span>-version
@@ -1278,7 +1278,7 @@
 <h2 id="ssh-key-for-private-repositories">SSH Key for Private Repositories<a class="headerlink" href="#ssh-key-for-private-repositories" title="Permanent link">&para;</a></h2>
 <p>QED test suites typically depend on private shared repositories (e.g. <code>QED-Shared</code>, <code>QED-Shared-&lt;app&gt;</code>). The runner checks these out during the workflow using an SSH deploy key.</p>
 <p><strong>Step 1: Generate a key pair on the runner</strong></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1">ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;github-actions-runner&quot;</span><span class="w"> </span>-f<span class="w"> </span>~/.ssh/id_ed25519<span class="w"> </span>-N<span class="w"> </span><span class="s2">&quot;&quot;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1">ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-C<span class="w"> </span><span class="s2">"github-actions-runner"</span><span class="w"> </span>-f<span class="w"> </span>~/.ssh/id_ed25519<span class="w"> </span>-N<span class="w"> </span><span class="s2">""</span>
 </span></code></pre></div>
 <p><strong>Step 2: Add the public key as a deploy key</strong></p>
 <p>Copy the public key:</p>

@@ -1522,13 +1522,13 @@ this is expected and does not indicate a problem.</p>
 - <strong>Adapter 2:</strong> Host-Only Adapter
 - <strong>Adapter 3:</strong> Bridged Adapter</p>
 <p>Add the bridged adapter and set promiscuous mode via VBoxManage (PowerShell):</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><span class="p">&amp;</span> <span class="s2">&quot;C:\Program Files\Oracle\VirtualBox\VBoxManage.exe&quot;</span> <span class="n">modifyvm</span> <span class="n">vm-mailpit</span> <span class="p">-</span><span class="n">-nic3</span> <span class="n">bridged</span> <span class="p">-</span><span class="n">-bridgeadapter3</span> <span class="s2">&quot;Realtek Gaming 2.5GbE Family Controller&quot;</span>
-</span><span id="__span-0-2"><span class="p">&amp;</span> <span class="s2">&quot;C:\Program Files\Oracle\VirtualBox\VBoxManage.exe&quot;</span> <span class="n">modifyvm</span> <span class="n">vm-mailpit</span> <span class="p">-</span><span class="n">-nicpromisc3</span> <span class="n">allow-all</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><span class="p">&amp;</span> <span class="s2">"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe"</span> <span class="n">modifyvm</span> <span class="n">vm-mailpit</span> <span class="p">-</span><span class="n">-nic3</span> <span class="n">bridged</span> <span class="p">-</span><span class="n">-bridgeadapter3</span> <span class="s2">"Realtek Gaming 2.5GbE Family Controller"</span>
+</span><span id="__span-0-2"><span class="p">&amp;</span> <span class="s2">"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe"</span> <span class="n">modifyvm</span> <span class="n">vm-mailpit</span> <span class="p">-</span><span class="n">-nicpromisc3</span> <span class="n">allow-all</span>
 </span></code></pre></div>
 <p>Replace the adapter name with the Ethernet adapter connected to your LAN.
 Use <code>VBoxManage list bridgedifs</code> to see available adapters.</p>
 <p>Verify promiscuous mode was set (VM must be running):</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><span class="p">&amp;</span> <span class="s2">&quot;C:\Program Files\Oracle\VirtualBox\VBoxManage.exe&quot;</span> <span class="n">showvminfo</span> <span class="n">vm-mailpit</span> <span class="p">|</span> <span class="n">findstr</span> <span class="s2">&quot;NIC 3&quot;</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><span class="p">&amp;</span> <span class="s2">"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe"</span> <span class="n">showvminfo</span> <span class="n">vm-mailpit</span> <span class="p">|</span> <span class="n">findstr</span> <span class="s2">"NIC 3"</span>
 </span></code></pre></div>
 <p>Should show <code>Promisc Policy: allow-all</code>. If it shows <code>deny</code>, power off and rerun the
 <code>modifyvm</code> command.</p>
@@ -1574,7 +1574,7 @@ handles the default route. Adding a second gateway causes routing conflicts.</p>
 current <code>linux-amd64</code> asset name.</p>
 <hr />
 <h2 id="step-5-create-the-systemd-service">Step 5: Create the systemd service<a class="headerlink" href="#step-5-create-the-systemd-service" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1">sudo<span class="w"> </span>tee<span class="w"> </span>/etc/systemd/system/mailpit.service<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1">sudo<span class="w"> </span>tee<span class="w"> </span>/etc/systemd/system/mailpit.service<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="s">&lt;&lt; 'EOF'</span>
 </span><span id="__span-8-2"><span class="s">[Unit]</span>
 </span><span id="__span-8-3"><span class="s">Description=Mailpit SMTP capture server</span>
 </span><span id="__span-8-4"><span class="s">After=network.target</span>
@@ -1598,14 +1598,14 @@ current <code>linux-amd64</code> asset name.</p>
 </span></code></pre></div>
 <p>You should see <code>Active: active (running)</code>.</p>
 <p>Verify both ports are listening:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1">ss<span class="w"> </span>-tlnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;1025|8025&#39;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1">ss<span class="w"> </span>-tlnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'1025|8025'</span>
 </span></code></pre></div>
 <hr />
 <h2 id="step-6-open-firewall-ports">Step 6: Open firewall ports<a class="headerlink" href="#step-6-open-firewall-ports" title="Permanent link">&para;</a></h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1">sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>ufw
-</span><span id="__span-10-2">sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">22</span>/tcp<span class="w"> </span>comment<span class="w"> </span><span class="s2">&quot;SSH&quot;</span>
-</span><span id="__span-10-3">sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">1025</span>/tcp<span class="w"> </span>comment<span class="w"> </span><span class="s2">&quot;Mailpit SMTP&quot;</span>
-</span><span id="__span-10-4">sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">8025</span>/tcp<span class="w"> </span>comment<span class="w"> </span><span class="s2">&quot;Mailpit Web UI&quot;</span>
+</span><span id="__span-10-2">sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">22</span>/tcp<span class="w"> </span>comment<span class="w"> </span><span class="s2">"SSH"</span>
+</span><span id="__span-10-3">sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">1025</span>/tcp<span class="w"> </span>comment<span class="w"> </span><span class="s2">"Mailpit SMTP"</span>
+</span><span id="__span-10-4">sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">8025</span>/tcp<span class="w"> </span>comment<span class="w"> </span><span class="s2">"Mailpit Web UI"</span>
 </span><span id="__span-10-5">sudo<span class="w"> </span>ufw<span class="w"> </span><span class="nb">enable</span>
 </span></code></pre></div>
 <hr />
@@ -1617,17 +1617,17 @@ current <code>linux-amd64</code> asset name.</p>
 <hr />
 <h2 id="vm-prerequisites-verification-script">VM prerequisites verification script<a class="headerlink" href="#vm-prerequisites-verification-script" title="Permanent link">&para;</a></h2>
 <p>Run on vm-mailpit after any provisioning or migration:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Network ===&quot;</span>
-</span><span id="__span-12-2">ip<span class="w"> </span>addr<span class="w"> </span>show<span class="w"> </span>enp0s8<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;inet &quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;enp0s8: NO IP&quot;</span>
-</span><span id="__span-12-3">ip<span class="w"> </span>addr<span class="w"> </span>show<span class="w"> </span>enp0s9<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;inet &quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;enp0s9: NO IP&quot;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><span class="nb">echo</span><span class="w"> </span><span class="s2">"=== Network ==="</span>
+</span><span id="__span-12-2">ip<span class="w"> </span>addr<span class="w"> </span>show<span class="w"> </span>enp0s8<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"inet "</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"enp0s8: NO IP"</span>
+</span><span id="__span-12-3">ip<span class="w"> </span>addr<span class="w"> </span>show<span class="w"> </span>enp0s9<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"inet "</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"enp0s9: NO IP"</span>
 </span><span id="__span-12-4">
-</span><span id="__span-12-5"><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Mailpit ===&quot;</span>
-</span><span id="__span-12-6">systemctl<span class="w"> </span>is-active<span class="w"> </span>mailpit<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;mailpit: running&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;mailpit: NOT RUNNING&quot;</span>
-</span><span id="__span-12-7">ss<span class="w"> </span>-tlnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">1025</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;SMTP port 1025: open&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;SMTP port 1025: NOT LISTENING&quot;</span>
-</span><span id="__span-12-8">ss<span class="w"> </span>-tlnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">8025</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Web UI port 8025: open&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Web UI port 8025: NOT LISTENING&quot;</span>
+</span><span id="__span-12-5"><span class="nb">echo</span><span class="w"> </span><span class="s2">"=== Mailpit ==="</span>
+</span><span id="__span-12-6">systemctl<span class="w"> </span>is-active<span class="w"> </span>mailpit<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"mailpit: running"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"mailpit: NOT RUNNING"</span>
+</span><span id="__span-12-7">ss<span class="w"> </span>-tlnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">1025</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"SMTP port 1025: open"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"SMTP port 1025: NOT LISTENING"</span>
+</span><span id="__span-12-8">ss<span class="w"> </span>-tlnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">8025</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Web UI port 8025: open"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Web UI port 8025: NOT LISTENING"</span>
 </span><span id="__span-12-9">
-</span><span id="__span-12-10"><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Firewall ===&quot;</span>
-</span><span id="__span-12-11">sudo<span class="w"> </span>ufw<span class="w"> </span>status<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;1025|8025&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ports may not be open in ufw&quot;</span>
+</span><span id="__span-12-10"><span class="nb">echo</span><span class="w"> </span><span class="s2">"=== Firewall ==="</span>
+</span><span id="__span-12-11">sudo<span class="w"> </span>ufw<span class="w"> </span>status<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'1025|8025'</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"ports may not be open in ufw"</span>
 </span></code></pre></div>
 <hr />
 <h2 id="migration-notes">Migration notes<a class="headerlink" href="#migration-notes" title="Permanent link">&para;</a></h2>

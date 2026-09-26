@@ -1188,13 +1188,13 @@
 <hr />
 <h2 id="how-it-works">How It Works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
 <p>In QED, <code>Given</code>, <code>When</code>, and <code>Then</code> are expressive constructs that help organise test logic and clarify intent — without dictating how the test is implemented. There are no external step definitions, no glue code, and no magic matching. Just clean, idiomatic Kotlin:</p>
-<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-0-1"><span class="n">Given</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;I log in to MyApp&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-0-2"><span class="w">    </span><span class="n">login</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;pw&quot;</span><span class="p">)</span>
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-0-1"><span class="n">Given</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="s">"I log in to MyApp"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-2"><span class="w">    </span><span class="n">login</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="s">"name"</span><span class="p">,</span><span class="w"> </span><span class="s">"pw"</span><span class="p">)</span>
 </span><span id="__span-0-3"><span class="p">}</span>
-</span><span id="__span-0-4"><span class="n">When</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;I create a record&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-4"><span class="n">When</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="s">"I create a record"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-0-5"><span class="w">    </span><span class="n">record</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createRecord</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">referenceNr</span><span class="p">)</span>
 </span><span id="__span-0-6"><span class="p">}</span>
-</span><span id="__span-0-7"><span class="n">Then</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;I can navigate to the record&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-7"><span class="n">Then</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="s">"I can navigate to the record"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-0-8"><span class="w">    </span><span class="n">searchRecord</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">record</span><span class="p">)</span>
 </span><span id="__span-0-9"><span class="p">}</span>
 </span></code></pre></div>
@@ -1210,7 +1210,7 @@
 <div class="language-kotlin highlight"><pre><span></span><code><span id="__span-2-1"><span class="n">startFromPage</span><span class="p">(</span><span class="n">homePage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-2-2"><span class="w">    </span><span class="n">button</span><span class="p">.</span><span class="na">click</span><span class="p">()</span>
 </span><span id="__span-2-3"><span class="w">    </span><span class="n">onPage</span><span class="p">(</span><span class="n">detailsPage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-4"><span class="w">        </span><span class="n">verify</span><span class="p">(</span><span class="s">&quot;details are visible&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-4"><span class="w">        </span><span class="n">verify</span><span class="p">(</span><span class="s">"details are visible"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-2-5"><span class="w">            </span><span class="n">expect</span><span class="p">(</span><span class="n">detailsPanel</span><span class="p">.</span><span class="na">isVisible</span><span class="p">).</span><span class="na">to</span><span class="p">.</span><span class="na">be</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
 </span><span id="__span-2-6"><span class="w">        </span><span class="p">}</span>
 </span><span id="__span-2-7"><span class="w">    </span><span class="p">}</span>

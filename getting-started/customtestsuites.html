@@ -1361,15 +1361,15 @@
 </blockquote>
 <hr />
 <h2 id="step-2-create-settingsgradlekts">Step 2: Create <code>settings.gradle.kts</code><a class="headerlink" href="#step-2-create-settingsgradlekts" title="Permanent link">&para;</a></h2>
-<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-1-1"><span class="n">rootProject</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;qed-sut-myapp&quot;</span>
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-1-1"><span class="n">rootProject</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"qed-sut-myapp"</span>
 </span><span id="__span-1-2">
 </span><span id="__span-1-3"><span class="c1">// ── Composite build ──────────────────────────────────────────────────</span>
 </span><span id="__span-1-4"><span class="c1">// Adjust the path to match your local directory layout.</span>
 </span><span id="__span-1-5"><span class="c1">//</span>
-</span><span id="__span-1-6"><span class="n">includeBuild</span><span class="p">(</span><span class="s">&quot;../QEDFramework&quot;</span><span class="p">)</span>
+</span><span id="__span-1-6"><span class="n">includeBuild</span><span class="p">(</span><span class="s">"../QEDFramework"</span><span class="p">)</span>
 </span><span id="__span-1-7">
 </span><span id="__span-1-8"><span class="c1">// Include QED-Shared if your project uses shared data classes</span>
-</span><span id="__span-1-9"><span class="c1">// includeBuild(&quot;../QEDFramework/QED-Shared&quot;)</span>
+</span><span id="__span-1-9"><span class="c1">// includeBuild("../QEDFramework/QED-Shared")</span>
 </span></code></pre></div>
 <blockquote>
 <p>Composite builds do not chain transitively. Every SUT repo that depends on the framework must also explicitly include <code>QED-Shared</code> if it uses shared types.</p>
@@ -1377,11 +1377,11 @@
 <hr />
 <h2 id="step-3-create-buildgradlekts">Step 3: Create <code>build.gradle.kts</code><a class="headerlink" href="#step-3-create-buildgradlekts" title="Permanent link">&para;</a></h2>
 <div class="language-kotlin highlight"><pre><span></span><code><span id="__span-2-1"><span class="n">plugins</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-2"><span class="w">    </span><span class="n">kotlin</span><span class="p">(</span><span class="s">&quot;jvm&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="s">&quot;2.0.20&quot;</span>
+</span><span id="__span-2-2"><span class="w">    </span><span class="n">kotlin</span><span class="p">(</span><span class="s">"jvm"</span><span class="p">)</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="s">"2.0.20"</span>
 </span><span id="__span-2-3"><span class="p">}</span>
 </span><span id="__span-2-4">
-</span><span id="__span-2-5"><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.qed.sut&quot;</span>
-</span><span id="__span-2-6"><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1.0.0&quot;</span>
+</span><span id="__span-2-5"><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"com.qed.sut"</span>
+</span><span id="__span-2-6"><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"1.0.0"</span>
 </span><span id="__span-2-7">
 </span><span id="__span-2-8"><span class="n">repositories</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-2-9"><span class="w">    </span><span class="n">mavenCentral</span><span class="p">()</span>
@@ -1393,9 +1393,9 @@
 </span><span id="__span-2-15">
 </span><span id="__span-2-16"><span class="n">dependencies</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-2-17"><span class="w">    </span><span class="c1">// QED Framework (resolved via composite build)</span>
-</span><span id="__span-2-18"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;com.qed:qed-framework:1.0.0&quot;</span><span class="p">)</span>
+</span><span id="__span-2-18"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">"com.qed:qed-framework:1.0.0"</span><span class="p">)</span>
 </span><span id="__span-2-19">
-</span><span id="__span-2-20"><span class="w">    </span><span class="n">testImplementation</span><span class="p">(</span><span class="s">&quot;org.jetbrains.kotlin:kotlin-test&quot;</span><span class="p">)</span>
+</span><span id="__span-2-20"><span class="w">    </span><span class="n">testImplementation</span><span class="p">(</span><span class="s">"org.jetbrains.kotlin:kotlin-test"</span><span class="p">)</span>
 </span><span id="__span-2-21">
 </span><span id="__span-2-22"><span class="w">    </span><span class="c1">// Add any project-specific dependencies here</span>
 </span><span id="__span-2-23"><span class="p">}</span>
@@ -1403,29 +1403,29 @@
 </span><span id="__span-2-25"><span class="c1">// ── Test suite selection ─────────────────────────────────────────────</span>
 </span><span id="__span-2-26"><span class="c1">// Usage: ./gradlew clean test -Ptestsuite=myapp -Penvironment=dev</span>
 </span><span id="__span-2-27"><span class="c1">//</span>
-</span><span id="__span-2-28"><span class="kd">val</span><span class="w"> </span><span class="nv">env</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">project</span><span class="p">.</span><span class="na">findProperty</span><span class="p">(</span><span class="s">&quot;environment&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">as?</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s">&quot;dev&quot;</span>
+</span><span id="__span-2-28"><span class="kd">val</span><span class="w"> </span><span class="nv">env</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">project</span><span class="p">.</span><span class="na">findProperty</span><span class="p">(</span><span class="s">"environment"</span><span class="p">)</span><span class="w"> </span><span class="k">as?</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s">"dev"</span>
 </span><span id="__span-2-29">
 </span><span id="__span-2-30"><span class="n">tasks</span><span class="p">.</span><span class="na">withType</span><span class="o">&lt;</span><span class="n">Test</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-31"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">project</span><span class="p">.</span><span class="na">hasProperty</span><span class="p">(</span><span class="s">&quot;testsuite&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-32"><span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">testSuite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">project</span><span class="p">.</span><span class="na">property</span><span class="p">(</span><span class="s">&quot;testsuite&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">String</span>
+</span><span id="__span-2-31"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">project</span><span class="p">.</span><span class="na">hasProperty</span><span class="p">(</span><span class="s">"testsuite"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-32"><span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">testSuite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">project</span><span class="p">.</span><span class="na">property</span><span class="p">(</span><span class="s">"testsuite"</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">String</span>
 </span><span id="__span-2-33"><span class="w">        </span><span class="n">useTestNG</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-2-34"><span class="w">            </span><span class="n">useDefaultListeners</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
-</span><span id="__span-2-35"><span class="w">            </span><span class="n">suites</span><span class="p">(</span><span class="s">&quot;src/test/kotlin/</span><span class="si">$</span><span class="n">testSuite</span><span class="s">/</span><span class="si">$</span><span class="n">testSuite</span><span class="s">.xml&quot;</span><span class="p">)</span>
+</span><span id="__span-2-35"><span class="w">            </span><span class="n">suites</span><span class="p">(</span><span class="s">"src/test/kotlin/</span><span class="si">$</span><span class="n">testSuite</span><span class="s">/</span><span class="si">$</span><span class="n">testSuite</span><span class="s">.xml"</span><span class="p">)</span>
 </span><span id="__span-2-36"><span class="w">        </span><span class="p">}</span>
 </span><span id="__span-2-37"><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-2-38"><span class="w">    </span><span class="n">systemProperty</span><span class="p">(</span><span class="s">&quot;env.name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">env</span><span class="p">)</span>
+</span><span id="__span-2-38"><span class="w">    </span><span class="n">systemProperty</span><span class="p">(</span><span class="s">"env.name"</span><span class="p">,</span><span class="w"> </span><span class="n">env</span><span class="p">)</span>
 </span><span id="__span-2-39"><span class="w">    </span><span class="n">testLogging</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-40"><span class="w">        </span><span class="n">events</span><span class="p">(</span><span class="s">&quot;passed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;skipped&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;failed&quot;</span><span class="p">)</span>
+</span><span id="__span-2-40"><span class="w">        </span><span class="n">events</span><span class="p">(</span><span class="s">"passed"</span><span class="p">,</span><span class="w"> </span><span class="s">"skipped"</span><span class="p">,</span><span class="w"> </span><span class="s">"failed"</span><span class="p">)</span>
 </span><span id="__span-2-41"><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-2-42"><span class="p">}</span>
 </span><span id="__span-2-43">
-</span><span id="__span-2-44"><span class="n">tasks</span><span class="p">.</span><span class="na">register</span><span class="o">&lt;</span><span class="n">Copy</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;copyExtentFonts&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-45"><span class="w">    </span><span class="n">from</span><span class="p">(</span><span class="s">&quot;resources/fonts&quot;</span><span class="p">)</span>
-</span><span id="__span-2-46"><span class="w">    </span><span class="n">into</span><span class="p">(</span><span class="n">layout</span><span class="p">.</span><span class="na">buildDirectory</span><span class="p">.</span><span class="na">dir</span><span class="p">(</span><span class="s">&quot;test-output/ExtentReport/fonts&quot;</span><span class="p">))</span>
+</span><span id="__span-2-44"><span class="n">tasks</span><span class="p">.</span><span class="na">register</span><span class="o">&lt;</span><span class="n">Copy</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"copyExtentFonts"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-45"><span class="w">    </span><span class="n">from</span><span class="p">(</span><span class="s">"resources/fonts"</span><span class="p">)</span>
+</span><span id="__span-2-46"><span class="w">    </span><span class="n">into</span><span class="p">(</span><span class="n">layout</span><span class="p">.</span><span class="na">buildDirectory</span><span class="p">.</span><span class="na">dir</span><span class="p">(</span><span class="s">"test-output/ExtentReport/fonts"</span><span class="p">))</span>
 </span><span id="__span-2-47"><span class="p">}</span>
 </span><span id="__span-2-48">
-</span><span id="__span-2-49"><span class="n">tasks</span><span class="p">.</span><span class="na">named</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-50"><span class="w">    </span><span class="n">finalizedBy</span><span class="p">(</span><span class="s">&quot;copyExtentFonts&quot;</span><span class="p">)</span>
+</span><span id="__span-2-49"><span class="n">tasks</span><span class="p">.</span><span class="na">named</span><span class="p">(</span><span class="s">"test"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-50"><span class="w">    </span><span class="n">finalizedBy</span><span class="p">(</span><span class="s">"copyExtentFonts"</span><span class="p">)</span>
 </span><span id="__span-2-51"><span class="p">}</span>
 </span></code></pre></div>
 <blockquote>
@@ -1434,15 +1434,15 @@
 <hr />
 <h2 id="step-4-create-the-testng-suite-xml">Step 4: Create the TestNG Suite XML<a class="headerlink" href="#step-4-create-the-testng-suite-xml" title="Permanent link">&para;</a></h2>
 <p>Create <code>src/test/kotlin/myapp/myapp.xml</code>:</p>
-<div class="language-xml highlight"><pre><span></span><code><span id="__span-3-1"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-</span><span id="__span-3-2"><span class="cp">&lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;</span>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-3-1"><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+</span><span id="__span-3-2"><span class="cp">&lt;!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd"&gt;</span>
 </span><span id="__span-3-3">
-</span><span id="__span-3-4"><span class="nt">&lt;suite</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;My App&quot;</span><span class="w"> </span><span class="na">verbose=</span><span class="s">&quot;10&quot;</span><span class="w"> </span><span class="na">parallel=</span><span class="s">&quot;methods&quot;</span><span class="w"> </span><span class="na">thread-count=</span><span class="s">&quot;5&quot;</span><span class="nt">&gt;</span>
-</span><span id="__span-3-5"><span class="w">    </span><span class="nt">&lt;parameter</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;configfile&quot;</span>
-</span><span id="__span-3-6"><span class="w">               </span><span class="na">value=</span><span class="s">&quot;src/test/kotlin/myapp/myapp-config.json&quot;</span><span class="nt">/&gt;</span>
-</span><span id="__span-3-7"><span class="w">    </span><span class="nt">&lt;test</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;My Test Suite&quot;</span><span class="nt">&gt;</span>
+</span><span id="__span-3-4"><span class="nt">&lt;suite</span><span class="w"> </span><span class="na">name=</span><span class="s">"My App"</span><span class="w"> </span><span class="na">verbose=</span><span class="s">"10"</span><span class="w"> </span><span class="na">parallel=</span><span class="s">"methods"</span><span class="w"> </span><span class="na">thread-count=</span><span class="s">"5"</span><span class="nt">&gt;</span>
+</span><span id="__span-3-5"><span class="w">    </span><span class="nt">&lt;parameter</span><span class="w"> </span><span class="na">name=</span><span class="s">"configfile"</span>
+</span><span id="__span-3-6"><span class="w">               </span><span class="na">value=</span><span class="s">"src/test/kotlin/myapp/myapp-config.json"</span><span class="nt">/&gt;</span>
+</span><span id="__span-3-7"><span class="w">    </span><span class="nt">&lt;test</span><span class="w"> </span><span class="na">name=</span><span class="s">"My Test Suite"</span><span class="nt">&gt;</span>
 </span><span id="__span-3-8"><span class="w">        </span><span class="nt">&lt;classes&gt;</span>
-</span><span id="__span-3-9"><span class="w">            </span><span class="nt">&lt;class</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;testcases.MyFirstTest&quot;</span><span class="nt">/&gt;</span>
+</span><span id="__span-3-9"><span class="w">            </span><span class="nt">&lt;class</span><span class="w"> </span><span class="na">name=</span><span class="s">"testcases.MyFirstTest"</span><span class="nt">/&gt;</span>
 </span><span id="__span-3-10"><span class="w">        </span><span class="nt">&lt;/classes&gt;</span>
 </span><span id="__span-3-11"><span class="w">    </span><span class="nt">&lt;/test&gt;</span>
 </span><span id="__span-3-12"><span class="nt">&lt;/suite&gt;</span>
@@ -1451,10 +1451,10 @@
 <h2 id="step-5-create-the-config-json">Step 5: Create the Config JSON<a class="headerlink" href="#step-5-create-the-config-json" title="Permanent link">&para;</a></h2>
 <p>Create <code>src/test/kotlin/myapp/myapp-config.json</code>:</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><span class="p">{</span>
-</span><span id="__span-4-2"><span class="w">  </span><span class="nt">&quot;testrunmetadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-3"><span class="w">    </span><span class="nt">&quot;projectName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;My App&quot;</span><span class="p">,</span>
-</span><span id="__span-4-4"><span class="w">    </span><span class="nt">&quot;environment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dev&quot;</span><span class="p">,</span>
-</span><span id="__span-4-5"><span class="w">    </span><span class="nt">&quot;baseURL&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://your-app-url.com&quot;</span>
+</span><span id="__span-4-2"><span class="w">  </span><span class="nt">"testrunmetadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-3"><span class="w">    </span><span class="nt">"projectName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My App"</span><span class="p">,</span>
+</span><span id="__span-4-4"><span class="w">    </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev"</span><span class="p">,</span>
+</span><span id="__span-4-5"><span class="w">    </span><span class="nt">"baseURL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-app-url.com"</span>
 </span><span id="__span-4-6"><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-4-7"><span class="p">}</span>
 </span></code></pre></div>
@@ -1520,7 +1520,7 @@
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><span class="nb">cd</span><span class="w"> </span>C:<span class="se">\Q</span>EDFramework<span class="se">\q</span>ed-sut-myapp
 </span><span id="__span-8-2">git<span class="w"> </span>init
 </span><span id="__span-8-3">git<span class="w"> </span>add<span class="w"> </span>.
-</span><span id="__span-8-4">git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Initial commit&quot;</span>
+</span><span id="__span-8-4">git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Initial commit"</span>
 </span><span id="__span-8-5">git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>git@github.com:YourUsername/qed-sut-myapp.git
 </span><span id="__span-8-6">git<span class="w"> </span>branch<span class="w"> </span>-M<span class="w"> </span>main
 </span><span id="__span-8-7">git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
@@ -1596,18 +1596,18 @@
 </span><span id="__span-11-7">            └── (shared data classes)
 </span></code></pre></div>
 <p><strong><code>settings.gradle.kts</code>:</strong></p>
-<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-12-1"><span class="n">rootProject</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;QED-Shared-MyApp&quot;</span>
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-12-1"><span class="n">rootProject</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"QED-Shared-MyApp"</span>
 </span><span id="__span-12-2">
-</span><span id="__span-12-3"><span class="n">includeBuild</span><span class="p">(</span><span class="s">&quot;../QED-Shared&quot;</span><span class="p">)</span>
+</span><span id="__span-12-3"><span class="n">includeBuild</span><span class="p">(</span><span class="s">"../QED-Shared"</span><span class="p">)</span>
 </span></code></pre></div>
 <p><strong><code>build.gradle.kts</code>:</strong></p>
 <div class="language-kotlin highlight"><pre><span></span><code><span id="__span-13-1"><span class="n">plugins</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-13-2"><span class="w">    </span><span class="n">kotlin</span><span class="p">(</span><span class="s">&quot;jvm&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="s">&quot;2.0.20&quot;</span>
-</span><span id="__span-13-3"><span class="w">    </span><span class="n">kotlin</span><span class="p">(</span><span class="s">&quot;plugin.serialization&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="s">&quot;2.0.20&quot;</span>
+</span><span id="__span-13-2"><span class="w">    </span><span class="n">kotlin</span><span class="p">(</span><span class="s">"jvm"</span><span class="p">)</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="s">"2.0.20"</span>
+</span><span id="__span-13-3"><span class="w">    </span><span class="n">kotlin</span><span class="p">(</span><span class="s">"plugin.serialization"</span><span class="p">)</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="s">"2.0.20"</span>
 </span><span id="__span-13-4"><span class="p">}</span>
 </span><span id="__span-13-5">
-</span><span id="__span-13-6"><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.qed&quot;</span>
-</span><span id="__span-13-7"><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1.0.0&quot;</span>
+</span><span id="__span-13-6"><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"com.qed"</span>
+</span><span id="__span-13-7"><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"1.0.0"</span>
 </span><span id="__span-13-8">
 </span><span id="__span-13-9"><span class="n">repositories</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-13-10"><span class="w">    </span><span class="n">mavenCentral</span><span class="p">()</span>
@@ -1620,12 +1620,12 @@
 </span><span id="__span-13-17"><span class="p">}</span>
 </span><span id="__span-13-18">
 </span><span id="__span-13-19"><span class="n">dependencies</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-13-20"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="n">kotlin</span><span class="p">(</span><span class="s">&quot;stdlib&quot;</span><span class="p">))</span>
-</span><span id="__span-13-21"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;com.qed:QED-Shared:1.0.0&quot;</span><span class="p">)</span>
-</span><span id="__span-13-22"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0&quot;</span><span class="p">)</span>
-</span><span id="__span-13-23"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;com.squareup.moshi:moshi:1.15.2&quot;</span><span class="p">)</span>
-</span><span id="__span-13-24"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;com.squareup.moshi:moshi-kotlin:1.15.2&quot;</span><span class="p">)</span>
-</span><span id="__span-13-25"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;com.squareup.moshi:moshi-adapters:1.15.2&quot;</span><span class="p">)</span>
+</span><span id="__span-13-20"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="n">kotlin</span><span class="p">(</span><span class="s">"stdlib"</span><span class="p">))</span>
+</span><span id="__span-13-21"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">"com.qed:QED-Shared:1.0.0"</span><span class="p">)</span>
+</span><span id="__span-13-22"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">"org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0"</span><span class="p">)</span>
+</span><span id="__span-13-23"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">"com.squareup.moshi:moshi:1.15.2"</span><span class="p">)</span>
+</span><span id="__span-13-24"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">"com.squareup.moshi:moshi-kotlin:1.15.2"</span><span class="p">)</span>
+</span><span id="__span-13-25"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">"com.squareup.moshi:moshi-adapters:1.15.2"</span><span class="p">)</span>
 </span><span id="__span-13-26"><span class="p">}</span>
 </span></code></pre></div>
 <h3 id="what-belongs-in-the-shared-library">What Belongs in the Shared Library<a class="headerlink" href="#what-belongs-in-the-shared-library" title="Permanent link">&para;</a></h3>
@@ -1638,25 +1638,25 @@
 <p>What does <strong>not</strong> belong here: app-specific business logic, database entities, or test-specific utilities.</p>
 <h3 id="configuring-the-ktor-app">Configuring the Ktor App<a class="headerlink" href="#configuring-the-ktor-app" title="Permanent link">&para;</a></h3>
 <p><strong><code>settings.gradle.kts</code></strong> in your Ktor project:</p>
-<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-14-1"><span class="n">rootProject</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;MyKtorApp&quot;</span>
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-14-1"><span class="n">rootProject</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"MyKtorApp"</span>
 </span><span id="__span-14-2">
-</span><span id="__span-14-3"><span class="n">includeBuild</span><span class="p">(</span><span class="s">&quot;../../QEDFramework/QED-Shared&quot;</span><span class="p">)</span>
-</span><span id="__span-14-4"><span class="n">includeBuild</span><span class="p">(</span><span class="s">&quot;../../QEDFramework/QED-Shared-MyApp&quot;</span><span class="p">)</span>
+</span><span id="__span-14-3"><span class="n">includeBuild</span><span class="p">(</span><span class="s">"../../QEDFramework/QED-Shared"</span><span class="p">)</span>
+</span><span id="__span-14-4"><span class="n">includeBuild</span><span class="p">(</span><span class="s">"../../QEDFramework/QED-Shared-MyApp"</span><span class="p">)</span>
 </span></code></pre></div>
 <p><strong><code>build.gradle.kts</code>:</strong></p>
 <div class="language-kotlin highlight"><pre><span></span><code><span id="__span-15-1"><span class="n">dependencies</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-15-2"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;com.qed:QED-Shared:1.0.0&quot;</span><span class="p">)</span>
-</span><span id="__span-15-3"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;com.qed:QED-Shared-MyApp:1.0.0&quot;</span><span class="p">)</span>
+</span><span id="__span-15-2"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">"com.qed:QED-Shared:1.0.0"</span><span class="p">)</span>
+</span><span id="__span-15-3"><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">"com.qed:QED-Shared-MyApp:1.0.0"</span><span class="p">)</span>
 </span><span id="__span-15-4"><span class="w">    </span><span class="c1">// ... other Ktor dependencies</span>
 </span><span id="__span-15-5"><span class="p">}</span>
 </span></code></pre></div>
 <h3 id="configuring-the-sut-repo">Configuring the SUT Repo<a class="headerlink" href="#configuring-the-sut-repo" title="Permanent link">&para;</a></h3>
 <p><strong><code>settings.gradle.kts</code>:</strong></p>
-<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-16-1"><span class="n">rootProject</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;qed-sut-myapp&quot;</span>
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-16-1"><span class="n">rootProject</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"qed-sut-myapp"</span>
 </span><span id="__span-16-2">
-</span><span id="__span-16-3"><span class="n">includeBuild</span><span class="p">(</span><span class="s">&quot;../QEDFramework&quot;</span><span class="p">)</span>
-</span><span id="__span-16-4"><span class="n">includeBuild</span><span class="p">(</span><span class="s">&quot;../QEDFramework/QED-Shared&quot;</span><span class="p">)</span>
-</span><span id="__span-16-5"><span class="n">includeBuild</span><span class="p">(</span><span class="s">&quot;../QEDFramework/QED-Shared-MyApp&quot;</span><span class="p">)</span>
+</span><span id="__span-16-3"><span class="n">includeBuild</span><span class="p">(</span><span class="s">"../QEDFramework"</span><span class="p">)</span>
+</span><span id="__span-16-4"><span class="n">includeBuild</span><span class="p">(</span><span class="s">"../QEDFramework/QED-Shared"</span><span class="p">)</span>
+</span><span id="__span-16-5"><span class="n">includeBuild</span><span class="p">(</span><span class="s">"../QEDFramework/QED-Shared-MyApp"</span><span class="p">)</span>
 </span></code></pre></div>
 <blockquote>
 <p><strong>Important:</strong> Gradle composite builds do not resolve transitively. Every consumer must explicitly declare all its <code>includeBuild</code> dependencies — even if another included build already depends on them. This is the most common pitfall when setting up the shared library pattern.</p>

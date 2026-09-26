@@ -1104,8 +1104,8 @@
 <h2 id="dsl-integration">DSL Integration<a class="headerlink" href="#dsl-integration" title="Permanent link">&para;</a></h2>
 <p>When used inside <code>onPage(&lt;PageObject&gt;) { ... }</code>, all <strong>public properties and functions</strong> of the page object become available within the DSL block.</p>
 <div class="language-kotlin highlight"><pre><span></span><code><span id="__span-0-1"><span class="n">onPage</span><span class="p">(</span><span class="n">loginPage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-0-2"><span class="w">    </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;alice&quot;</span>
-</span><span id="__span-0-3"><span class="w">    </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;secret&quot;</span>
+</span><span id="__span-0-2"><span class="w">    </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"alice"</span>
+</span><span id="__span-0-3"><span class="w">    </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"secret"</span>
 </span><span id="__span-0-4"><span class="w">    </span><span class="n">loginButton</span><span class="p">.</span><span class="na">click</span><span class="p">()</span>
 </span><span id="__span-0-5"><span class="p">}</span>
 </span></code></pre></div>
@@ -1118,14 +1118,14 @@
 <h2 id="defining-a-page-object">Defining a Page Object<a class="headerlink" href="#defining-a-page-object" title="Permanent link">&para;</a></h2>
 <p>Page objects are regular Kotlin classes with public properties representing UI elements:</p>
 <div class="language-kotlin highlight"><pre><span></span><code><span id="__span-1-1"><span class="kd">class</span><span class="w"> </span><span class="nc">LoginPage</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Page</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-1-2"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">userName</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">InputFieldDelegate</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;input[id=&#39;username&#39;]&quot;</span><span class="p">)</span>
-</span><span id="__span-1-3"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">password</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">InputFieldDelegate</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;input[id=&#39;password&#39;]&quot;</span><span class="p">)</span>
-</span><span id="__span-1-4"><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">loginButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">button</span><span class="p">(</span><span class="s">&quot;login&quot;</span><span class="p">)</span>
+</span><span id="__span-1-2"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">userName</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">InputFieldDelegate</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="s">"input[id='username']"</span><span class="p">)</span>
+</span><span id="__span-1-3"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">password</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">InputFieldDelegate</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="s">"input[id='password']"</span><span class="p">)</span>
+</span><span id="__span-1-4"><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">loginButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">button</span><span class="p">(</span><span class="s">"login"</span><span class="p">)</span>
 </span><span id="__span-1-5"><span class="p">}</span>
 </span></code></pre></div>
 <p>Using a delegate allows direct value assignment in the DSL — <code>username = "alice"</code> rather than <code>username.value = "alice"</code>. Without a delegate, the property holds the element itself:</p>
 <div class="language-kotlin highlight"><pre><span></span><code><span id="__span-2-1"><span class="kd">class</span><span class="w"> </span><span class="nc">LoginPage</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Page</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-2"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">userName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InputField</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;input[id=&#39;username&#39;]&quot;</span><span class="p">)</span>
+</span><span id="__span-2-2"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">userName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InputField</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="s">"input[id='username']"</span><span class="p">)</span>
 </span><span id="__span-2-3"><span class="p">}</span>
 </span></code></pre></div>
 <hr />
@@ -1133,12 +1133,12 @@
 <p>QED supports factory-based element resolution, where the factory determines which JS library is in use and returns an element with matching behaviour.</p>
 <p>To use factory-based resolution, use the lowercase form of the element name (<code>inputField</code> instead of <code>InputField</code>):</p>
 <div class="language-kotlin highlight"><pre><span></span><code><span id="__span-3-1"><span class="kd">class</span><span class="w"> </span><span class="nc">LoginPage</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Page</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-3-2"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">userName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inputField</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;input[id=&#39;username&#39;]&quot;</span><span class="p">)</span>
-</span><span id="__span-3-3"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">password</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">inputFieldDelegate</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;input[id=&#39;password&#39;]&quot;</span><span class="p">)</span>
+</span><span id="__span-3-2"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">userName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inputField</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="s">"input[id='username']"</span><span class="p">)</span>
+</span><span id="__span-3-3"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">password</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">inputFieldDelegate</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="s">"input[id='password']"</span><span class="p">)</span>
 </span><span id="__span-3-4"><span class="p">}</span>
 </span></code></pre></div>
 <p>The JS library used by the application is declared in the configuration file:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><span class="nt">&quot;widgettype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;JQWIDGETS&quot;</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><span class="nt">"widgettype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JQWIDGETS"</span>
 </span></code></pre></div>
 <p><strong>Supported libraries</strong></p>
 <ul>
@@ -1156,7 +1156,7 @@
 </span><span id="__span-5-5">
 </span><span id="__span-5-6"><span class="n">onPage</span><span class="p">(</span><span class="n">summaryPage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-5-7"><span class="w">    </span><span class="n">header</span><span class="p">.</span><span class="na">userMenu</span><span class="p">.</span><span class="na">click</span><span class="p">()</span>
-</span><span id="__span-5-8"><span class="w">    </span><span class="n">todoList</span><span class="p">.</span><span class="na">selectItem</span><span class="p">(</span><span class="s">&quot;Farm&quot;</span><span class="p">)</span>
+</span><span id="__span-5-8"><span class="w">    </span><span class="n">todoList</span><span class="p">.</span><span class="na">selectItem</span><span class="p">(</span><span class="s">"Farm"</span><span class="p">)</span>
 </span><span id="__span-5-9"><span class="w">    </span><span class="n">createButton</span><span class="p">.</span><span class="na">click</span><span class="p">()</span>
 </span><span id="__span-5-10"><span class="p">}</span>
 </span></code></pre></div>
