@@ -29,14 +29,15 @@ class IntJsonAdapter {
 }
 
 
-class UuidAdapter : JsonAdapter<UUID>() {
+// Plain annotated adapter (no JsonAdapter inheritance): extending JsonAdapter<UUID> while also
+// annotating with @ToJson/@FromJson made Kotlin 2.4 generate annotated bridge methods with Object
+// parameters, which Moshi then registered as a catch-all adapter for every type.
+class UuidAdapter {
     @FromJson
-    override fun fromJson(reader: JsonReader): UUID? = UUID.fromString(reader.readJsonValue().toString())
+    fun fromJson(value: String): UUID = UUID.fromString(value)
 
     @ToJson
-    override fun toJson(writer: JsonWriter, value: UUID?) {
-        writer.jsonValue(value.toString())
-    }
+    fun toJson(value: UUID): String = value.toString()
 }
 
 

@@ -2,6 +2,7 @@ plugins {
     kotlin("jvm") version "2.4.20"
     `java-library`  // enables api vs implementation distinction
     kotlin("plugin.allopen") version "2.4.20"
+    kotlin("plugin.lombok")
 }
 
 group = "com.qed"
@@ -78,4 +79,5 @@ dependencies {
     // ── Shared data classes ──────────────────────────────────────────────
     // api: Framework code references types like IURLPath from QED-Shared
     api("com.qed:QED-Shared:1.0.0")
+    testImplementation(kotlin("test"))
 }
