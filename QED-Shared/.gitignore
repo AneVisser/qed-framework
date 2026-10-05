@@ -38,3 +38,6 @@ Thumbs.db
 
 # VS Code (if used)
 .vscode/
+
+# Kotlin 2.x project-local build data
+.kotlin/
