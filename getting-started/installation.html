@@ -1235,21 +1235,25 @@
 <p>QED uses a multi-repository architecture:</p>
 <ul>
 <li><strong>qed-framework</strong> — the public, reusable test framework (includes <code>qed-demos/</code> as a working example)</li>
-<li><strong>QED-Shared</strong> — shared data classes used across the framework and SUT repositories</li>
+<li><strong>QED-Api-Contract</strong> — shared contract types (such as <code>RequestType</code>) used across the framework and SUT repositories</li>
 <li><strong>SUT repositories</strong> — private repos for each System Under Test, each depending on the framework via Gradle composite builds</li>
 </ul>
-<p>All repos are designed to sit as siblings on disk:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1">C:\QEDFramework\
-</span><span id="__span-0-2">├── qed-framework\          ← the framework
-</span><span id="__span-0-3">├── qed-demos\              ← demo test suites (inside the framework repo)
-</span><span id="__span-0-4">├── QED-Shared\             ← shared data classes
-</span><span id="__span-0-5">├── qed-sut-myapp\          ← your private SUT repo
-</span><span id="__span-0-6">└── qed-sut-myapp-rest\     ← your private REST SUT repo
+<p>The framework repository is the root folder; the other repositories are cloned inside it:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1">C:\QEDFramework\ ← the framework (qed-framework repository)
+</span><span id="__span-0-2">├── qed-demos\ ← demo test suites (part of the framework repository)
+</span><span id="__span-0-3">├── QED-Api-Contract\ ← shared contract types
+</span><span id="__span-0-4">├── qed-sut-myapp\ ← your private SUT repo
+</span><span id="__span-0-5">└── qed-sut-myapp-rest\ ← your private REST SUT repo
 </span></code></pre></div>
+<blockquote>
+<p><strong>Upgrading from 1.x?</strong> <code>QED-Shared</code> has been replaced by <code>QED-Api-Contract</code>. Clone
+QED-Api-Contract as described in Step 1, and replace <code>import qed.testbaseclass.RequestType</code>
+with <code>import qed.contract.RequestType</code> in your SUT repositories.</p>
+</blockquote>
 <hr />
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <p>Before you begin, make sure your system has:</p>
-<p><strong>Java JDK 22+</strong> — Install from <a href="https://aws.amazon.com/corretto/">Amazon Corretto</a> or your preferred vendor. Check that <code>JAVA_HOME</code> is set to the correct directory in environment variables.</p>
+<p><strong>Java JDK 22+ and JDK 17</strong> — Install both from <a href="https://aws.amazon.com/corretto/">Amazon Corretto</a> or your preferred vendor. The framework and test suites run on JDK 22+; the shared contract module is compiled for Java 17, and Gradle needs a JDK 17 installation to build it. Set <code>JAVA_HOME</code> to the JDK 22 directory in environment variables; Gradle finds the JDK 17 installation automatically.</p>
 <p><img alt="img.png" src="img.png" /></p>
 <p><strong>IntelliJ IDEA</strong> (Community Edition is fine) — Download from <a href="https://www.jetbrains.com/idea/">JetBrains</a>. Create the associations with <code>.kt</code>, <code>.gradle</code>, <code>.java</code>, <code>.kts</code> if you want these files to load automatically in IntelliJ.</p>
 <p><img alt="img_1.png" src="img_1.png" /></p>
@@ -1261,12 +1265,12 @@
 </span></code></pre></div>
 <hr />
 <h2 id="step-1-clone-the-qed-repositories">Step 1: Clone the QED Repositories<a class="headerlink" href="#step-1-clone-the-qed-repositories" title="Permanent link">&para;</a></h2>
-<p>Clone the framework, then clone QED-Shared inside it. Both need to sit within the same root directory for the Gradle composite build to resolve correctly.</p>
+<p>Clone the framework, then clone QED-Api-Contract inside it. Both need to sit within the same root directory for the Gradle composite build to resolve correctly.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/AneVisser/qed-framework.git<span class="w"> </span>QEDFramework
 </span><span id="__span-2-2"><span class="nb">cd</span><span class="w"> </span>QEDFramework
-</span><span id="__span-2-3">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/AneVisser/QED-Shared.git
+</span><span id="__span-2-3">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/AneVisser/QED-Api-Contract.git
 </span></code></pre></div>
-<p><code>QED-Shared</code> contains shared data classes that the framework and your SUT repositories depend on. When you add your own SUT repos later, clone them here as siblings of <code>QED-Shared</code>.</p>
+<p><code>QED-Api-Contract</code> contains shared contract types that the framework and your SUT repositories depend on. When you add your own SUT repos later, clone them here as siblings of <code>QED-Api-Contract</code>.</p>
 <p>If GitHub asks for credentials, follow the prompts and enter your credentials.</p>
 <hr />
 <h2 id="step-2-open-the-framework-in-intellij">Step 2: Open the Framework in IntelliJ<a class="headerlink" href="#step-2-open-the-framework-in-intellij" title="Permanent link">&para;</a></h2>
