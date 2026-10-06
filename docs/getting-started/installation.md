@@ -9,19 +9,23 @@ Welcome to QED — a modern, Kotlin-based test automation framework designed for
 QED uses a multi-repository architecture:
 
 - **qed-framework** — the public, reusable test framework (includes `qed-demos/` as a working example)
-- **QED-Shared** — shared data classes used across the framework and SUT repositories
+- **QED-Api-Contract** — shared contract types (such as `RequestType`) used across the framework and SUT repositories
 - **SUT repositories** — private repos for each System Under Test, each depending on the framework via Gradle composite builds
 
-All repos are designed to sit as siblings on disk:
+The framework repository is the root folder; the other repositories are cloned inside it:
 
 ```
-C:\QEDFramework\
-├── qed-framework\          ← the framework
-├── qed-demos\              ← demo test suites (inside the framework repo)
-├── QED-Shared\             ← shared data classes
-├── qed-sut-myapp\          ← your private SUT repo
-└── qed-sut-myapp-rest\     ← your private REST SUT repo
+C:\QEDFramework\ ← the framework (qed-framework repository)
+├── qed-demos\ ← demo test suites (part of the framework repository)
+├── QED-Api-Contract\ ← shared contract types
+├── qed-sut-myapp\ ← your private SUT repo
+└── qed-sut-myapp-rest\ ← your private REST SUT repo
 ```
+
+
+> **Upgrading from 1.x?** `QED-Shared` has been replaced by `QED-Api-Contract`. Clone
+> QED-Api-Contract as described in Step 1, and replace `import qed.testbaseclass.RequestType`
+> with `import qed.contract.RequestType` in your SUT repositories.
 
 ---
 
@@ -29,7 +33,7 @@ C:\QEDFramework\
 
 Before you begin, make sure your system has:
 
-**Java JDK 22+** — Install from [Amazon Corretto](https://aws.amazon.com/corretto/) or your preferred vendor. Check that `JAVA_HOME` is set to the correct directory in environment variables.
+**Java JDK 22+ and JDK 17** — Install both from [Amazon Corretto](https://aws.amazon.com/corretto/) or your preferred vendor. The framework and test suites run on JDK 22+; the shared contract module is compiled for Java 17, and Gradle needs a JDK 17 installation to build it. Set `JAVA_HOME` to the JDK 22 directory in environment variables; Gradle finds the JDK 17 installation automatically.
 
 ![img.png](img.png)
 
@@ -52,15 +56,15 @@ git --version
 
 ## Step 1: Clone the QED Repositories
 
-Clone the framework, then clone QED-Shared inside it. Both need to sit within the same root directory for the Gradle composite build to resolve correctly.
+Clone the framework, then clone QED-Api-Contract inside it. Both need to sit within the same root directory for the Gradle composite build to resolve correctly.
 
 ```shell
 git clone https://github.com/AneVisser/qed-framework.git QEDFramework
 cd QEDFramework
-git clone https://github.com/AneVisser/QED-Shared.git
+git clone https://github.com/AneVisser/QED-Api-Contract.git
 ```
 
-`QED-Shared` contains shared data classes that the framework and your SUT repositories depend on. When you add your own SUT repos later, clone them here as siblings of `QED-Shared`.
+`QED-Api-Contract` contains shared contract types that the framework and your SUT repositories depend on. When you add your own SUT repos later, clone them here as siblings of `QED-Api-Contract`.
 
 If GitHub asks for credentials, follow the prompts and enter your credentials.
 
