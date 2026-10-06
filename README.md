@@ -48,6 +48,35 @@ Whether you're validating APIs, orchestrating UI flows, or integrating with CI/C
 
 ---
 
+
+## Getting Started
+
+QED is built from source together with its shared contract module. Clone both
+repositories so that QED-Api-Contract sits inside the qed-framework folder:
+
+```
+qed-framework/              ← this repository
+└── QED-Api-Contract/       ← https://github.com/AneVisser/QED-Api-Contract
+```
+
+```bash
+git clone https://github.com/AneVisser/qed-framework.git
+cd qed-framework
+git clone https://github.com/AneVisser/QED-Api-Contract.git
+```
+
+Gradle picks up QED-Api-Contract automatically as a composite build.
+
+---
+
+## Upgrading to 2.0
+
+- `RequestType` has moved to the QED-Api-Contract module. Replace
+  `import qed.testbaseclass.RequestType` with `import qed.contract.RequestType`.
+  The old import still works for now, but is deprecated.
+- QED-Shared is deprecated and no longer required. Clone QED-Api-Contract
+  instead (see Getting Started).
+
 ## Sample DSL (Mixed UI and REST)
 
 ```kotlin
