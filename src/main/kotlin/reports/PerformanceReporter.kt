@@ -18,7 +18,7 @@ import qed.performance.PerformanceTracker
 import qed.performance.PerformanceTracker.getAllRecords
 import qed.testbaseclass.IURLPath
 import qed.testbaseclass.QEDDate
-import qed.testbaseclass.RequestType
+import qed.contract.RequestType
 import qed.testbaseclass.TestRunContext
 import qed.testbaseclass.coefVar
 import qed.testbaseclass.standardDeviation

@@ -4,8 +4,8 @@ pluginManagement {
     }
 }
 rootProject.name = "qed-framework"
-includeBuild("QED-Shared") {
+includeBuild("QED-Api-Contract") {
     dependencySubstitution {
-        substitute(module("com.qed:QED-Shared")).using(project(":"))
+        substitute(module("com.qed:QED-Api-Contract")).using(project(":"))
     }
 }
