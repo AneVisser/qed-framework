@@ -7,7 +7,7 @@ setlocal
 cd /d "%~dp0"
 
 rem Modules to publish, in dependency order
-set MODULES=QED-Api-Contract QED-Shared QED-Shared-DairyMax
+set MODULES=QED-Api-Contract QED-Shared-DairyMax
 
 for %%M in (%MODULES%) do (
     echo.
