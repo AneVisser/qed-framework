@@ -10,13 +10,12 @@ import io.restassured.response.Response
 import kotlinx.coroutines.future.await
 import org.hamcrest.Matchers.anyOf
 import org.hamcrest.Matchers.equalTo
+import qed.contract.RequestType
 import qed.json.QEDJson
 import qed.json.toCompactJson
 import qed.performance.trackPerf
 import qed.reports.Logger
-import java.net.HttpURLConnection
 import java.net.URI
-import java.net.URL
 import java.net.URLEncoder
 import java.net.http.HttpClient
 import java.net.http.HttpRequest

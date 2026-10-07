@@ -3,7 +3,7 @@ package qed.sut.apichallenges
 import qed.testbaseclass.IURLPath
 import qed.testbaseclass.PayloadKind
 import qed.testbaseclass.PayloadKind.Single
-import qed.testbaseclass.RequestType
+import qed.contract.RequestType
 
 
 enum class APIChalURLPath(private val path: String,

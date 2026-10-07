@@ -6,4 +6,6 @@ rootProject.name = "qed-demos"
 //   includeBuild("../qed-framework")
 //
 includeBuild("..")
-includeBuild("../QED-Shared")
+// QED-Shared is deprecated as of 2.0.0 and replaced by QED-Api-Contract:
+// includeBuild("../QED-Shared")
+includeBuild("../QED-Api-Contract")

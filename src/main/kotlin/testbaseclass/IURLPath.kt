@@ -1,5 +1,6 @@
 package qed.testbaseclass
 
+import qed.contract.RequestType
 import kotlin.reflect.KClass
 
 interface IURLPath {

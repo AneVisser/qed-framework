@@ -2,7 +2,7 @@ package qed.performance
 
 import qed.json.QEDJson
 import qed.testbaseclass.IURLPath
-import qed.testbaseclass.RequestType
+import qed.contract.RequestType
 import qed.testbaseclass.standardDeviation
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap

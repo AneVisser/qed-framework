@@ -78,6 +78,9 @@ dependencies {
 
     // ── Shared data classes ──────────────────────────────────────────────
     // api: Framework code references types like IURLPath from QED-Shared
-    api("com.qed:QED-Shared:1.0.0")
+    // QED-Shared is deprecated as of 2.0.0 and replaced by QED-Api-Contract:
+    // api("com.qed:QED-Shared:1.0.0")
+    // api: framework and SUT code use contract types such as RequestType (qed.contract)
+    api("com.qed:QED-Api-Contract:1.0.0")
     testImplementation(kotlin("test"))
 }
