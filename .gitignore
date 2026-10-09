@@ -27,6 +27,7 @@ site/
 
 # ── Nested repos (not part of this repo) ──────────────────────────────
 QED-Shared-DairyMax/
+QED-Shared-Livestock/
 qed-sut-*/
 QED_Framework/
 untitled/
