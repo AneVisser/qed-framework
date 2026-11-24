@@ -105,11 +105,19 @@ class MailpitHelper(private val mailpitBaseUrl: String) {
         return JSONObject(response.body())
     }
 
+    // 2026-11-25: Mailpit deletes through DELETE api/v1/messages with the IDs in the body (an
+    // empty list deletes everything). There is no DELETE on api/v1/message/{id}: the earlier call
+    // got an error that was ignored, so read messages stayed and a later waitForEmail could find
+    // the same message again. The status is checked now, so a failed delete shows.
     private fun deleteMessageById(id: String) {
         val request = HttpRequest.newBuilder()
-            .uri(URI.create("$mailpitBaseUrl/api/v1/message/$id"))
-            .DELETE()
+            .uri(URI.create("$mailpitBaseUrl/api/v1/messages"))
+            .header("Content-Type", "application/json")
+            .method("DELETE", HttpRequest.BodyPublishers.ofString(JSONObject().put("IDs", JSONArray().put(id)).toString()))
             .build()
-        client.send(request, HttpResponse.BodyHandlers.ofString())
+        val response = client.send(request, HttpResponse.BodyHandlers.ofString())
+        check(response.statusCode() == 200) {
+            "Mailpit did not delete message $id: HTTP ${response.statusCode()} ${response.body()}"
+        }
     }
 }
